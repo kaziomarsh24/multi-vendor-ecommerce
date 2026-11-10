@@ -26,7 +26,7 @@ export default function ProductEdit({ product, categories }: ProductEditProps) {
 
     const { data, setData, processing, errors } = useForm({
         _method: 'PUT',
-        category_id: product.category_id,
+        category_id: product.category_id as number | string,
         subcategory_id: product.subcategory_id || '',
         title: product.title,
         slug: product.slug,
