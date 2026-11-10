@@ -18,7 +18,7 @@ This platform implements a centralized Master Catalog model with distributed Sho
 
 ## Tech Stack
 
-- **Backend:** Laravel (PHP 8.3+)
+- **Backend:** Laravel 13 (PHP 8.4+)
 - **Frontend:** React 19, Inertia.js v3, TypeScript, Tailwind CSS
 - **Database:** SQLite / MySQL / PostgreSQL
 - **Testing:** Pest PHP (31 passing feature tests)
@@ -31,7 +31,7 @@ Choose either **Option 1 (Docker - Recommended)** for a zero-configuration conta
 
 ### Option 1: Local Setup with Docker (Recommended)
 
-Pre-configured with PHP-FPM, MySQL 8.0, and Nginx. The automated container entrypoint automatically installs Composer dependencies, waits for MySQL, generates application keys, runs migrations with authentic seeders, and links storage.
+Pre-configured with PHP 8.5 FPM, MySQL 8.0, and Nginx. The automated container entrypoint automatically installs Composer dependencies, waits for MySQL, generates application keys, runs migrations with authentic seeders, and links storage.
 
 ```bash
 # 1. Copy Docker-specific environment configuration
