@@ -6,23 +6,23 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @font-face {
-    font-family: "Euclid Circular A";
-    src: url("/fonts/EuclidCircularA-Regular.woff2") format("woff2");
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/EuclidCircularA-Regular.woff2') format('woff2');
     font-weight: 400;
 }
 @font-face {
-    font-family: "Euclid Circular A";
-    src: url("/fonts/EuclidCircularA-Medium.woff2") format("woff2");
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/EuclidCircularA-Medium.woff2') format('woff2');
     font-weight: 500;
 }
 @font-face {
-    font-family: "Euclid Circular A";
-    src: url("/fonts/EuclidCircularA-SemiBold.woff2") format("woff2");
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/EuclidCircularA-SemiBold.woff2') format('woff2');
     font-weight: 600;
 }
 @font-face {
-    font-family: "Euclid Circular A";
-    src: url("/fonts/EuclidCircularA-Bold.woff2") format("woff2");
+    font-family: 'Euclid Circular A';
+    src: url('/fonts/EuclidCircularA-Bold.woff2') format('woff2');
     font-weight: 700;
 }
 
@@ -30,21 +30,22 @@
 
 @theme {
     --font-sans:
-        'Euclid Circular A', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        'Euclid Circular A', 'Plus Jakarta Sans', system-ui, -apple-system,
+        sans-serif;
 
-    --color-dark: #1C274C;
+    --color-dark: #1c274c;
     --color-dark-2: #495270;
     --color-dark-3: #606882;
-    --color-dark-4: #8D93A5;
-    --color-blue: #3C50E0;
-    --color-blue-dark: #1C3FB7;
-    --color-blue-light: #E5EAF4;
-    --color-gray-1: #F9FAFB;
-    --color-gray-2: #F3F4F6;
-    --color-gray-3: #E5E7EB;
-    --color-orange: #FDB614;
-    --color-red: #F23030;
-    --color-green: #22AD5C;
+    --color-dark-4: #8d93a5;
+    --color-blue: #3c50e0;
+    --color-blue-dark: #1c3fb7;
+    --color-blue-light: #e5eaf4;
+    --color-gray-1: #f9fafb;
+    --color-gray-2: #f3f4f6;
+    --color-gray-3: #e5e7eb;
+    --color-orange: #fdb614;
+    --color-red: #f23030;
+    --color-green: #22ad5c;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);

@@ -9,19 +9,30 @@ interface StorefrontLayoutProps {
 export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
     const { auth, allShops, allCategories } = usePage<{
         auth: { user: (User & { shop?: Shop }) | null };
-        allShops?: { id: number; name: string; slug: string; logo?: string | null; logo_url?: string | null }[];
+        allShops?: {
+            id: number;
+            name: string;
+            slug: string;
+            logo?: string | null;
+            logo_url?: string | null;
+        }[];
         allCategories?: { id: number; name: string }[];
     }>().props;
     const user = auth?.user;
     const [searchQuery, setSearchQuery] = useState(() => {
         if (typeof window !== 'undefined') {
-            return new URLSearchParams(window.location.search).get('search') || '';
+            return (
+                new URLSearchParams(window.location.search).get('search') || ''
+            );
         }
         return '';
     });
     const [searchCategory, setSearchCategory] = useState(() => {
         if (typeof window !== 'undefined') {
-            return new URLSearchParams(window.location.search).get('category') || '0';
+            return (
+                new URLSearchParams(window.location.search).get('category') ||
+                '0'
+            );
         }
         return '0';
     });
@@ -44,15 +55,18 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
     };
 
     return (
-        <div className="bg-white min-h-screen flex flex-col font-sans text-dark">
+        <div className="flex min-h-screen flex-col bg-white font-sans text-dark">
             {/* Header */}
-            <header className="w-full bg-white border-b border-gray-3 sticky top-0 z-50">
-                <div className="max-w-292.5 mx-auto px-4 sm:px-8 xl:px-0">
+            <header className="sticky top-0 z-50 w-full border-b border-gray-3 bg-white">
+                <div className="mx-auto max-w-292.5 px-4 sm:px-8 xl:px-0">
                     {/* Header Top */}
-                    <div className="flex flex-col lg:flex-row gap-5 items-end lg:items-center xl:justify-between py-6">
+                    <div className="flex flex-col items-end gap-5 py-6 lg:flex-row lg:items-center xl:justify-between">
                         {/* Header Top Left */}
-                        <div className="xl:w-auto flex-col sm:flex-row w-full flex sm:justify-between sm:items-center gap-5 sm:gap-10">
-                            <Link className="shrink-0 flex items-center gap-2 group" href="/">
+                        <div className="flex w-full flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-10 xl:w-auto">
+                            <Link
+                                className="group flex shrink-0 items-center gap-2"
+                                href="/"
+                            >
                                 <img
                                     src="/images/logo/csn_logo_transparent.png"
                                     alt="CSN Bangladesh Ltd."
@@ -60,48 +74,79 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                                 />
                             </Link>
 
-                            <div className="max-w-118.75 w-full">
+                            <div className="w-full max-w-118.75">
                                 <form onSubmit={handleSearchSubmit}>
                                     <div className="flex items-center">
-                                        <div className="bg-gray-1 rounded-l-[5px] border border-gray-3 border-r-0 text-dark text-sm py-2.5 pl-3.5 pr-4 flex items-center gap-1.5 cursor-pointer">
+                                        <div className="flex cursor-pointer items-center gap-1.5 rounded-l-[5px] border border-r-0 border-gray-3 bg-gray-1 py-2.5 pr-4 pl-3.5 text-sm text-dark">
                                             <select
                                                 value={searchCategory}
-                                                onChange={(e) => setSearchCategory(e.target.value)}
-                                                className="bg-transparent text-xs text-dark font-medium focus:outline-none cursor-pointer max-w-[130px] sm:max-w-[160px] truncate"
+                                                onChange={(e) =>
+                                                    setSearchCategory(
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="max-w-[130px] cursor-pointer truncate bg-transparent text-xs font-medium text-dark focus:outline-none sm:max-w-[160px]"
                                             >
-                                                <option value="0">All Categories</option>
-                                                {allCategories && allCategories.length > 0 ? (
+                                                <option value="0">
+                                                    All Categories
+                                                </option>
+                                                {allCategories &&
+                                                allCategories.length > 0 ? (
                                                     allCategories.map((cat) => (
-                                                        <option key={cat.id} value={String(cat.id)}>
+                                                        <option
+                                                            key={cat.id}
+                                                            value={String(
+                                                                cat.id,
+                                                            )}
+                                                        >
                                                             {cat.name}
                                                         </option>
                                                     ))
                                                 ) : (
                                                     <>
-                                                        <option value="1">Smartphones & Tablets</option>
-                                                        <option value="4">Laptops & Computers</option>
-                                                        <option value="8">Audio & Sound</option>
-                                                        <option value="11">Wearables & Gadgets</option>
+                                                        <option value="1">
+                                                            Smartphones &
+                                                            Tablets
+                                                        </option>
+                                                        <option value="4">
+                                                            Laptops & Computers
+                                                        </option>
+                                                        <option value="8">
+                                                            Audio & Sound
+                                                        </option>
+                                                        <option value="11">
+                                                            Wearables & Gadgets
+                                                        </option>
                                                     </>
                                                 )}
                                             </select>
                                         </div>
 
-                                        <div className="relative max-w-83.25 sm:min-w-83.25 w-full">
-                                            <span className="absolute left-0 top-1/2 -translate-y-1/2 inline-block w-px h-5 bg-gray-3"></span>
+                                        <div className="relative w-full max-w-83.25 sm:min-w-83.25">
+                                            <span className="absolute top-1/2 left-0 inline-block h-5 w-px -translate-y-1/2 bg-gray-3"></span>
                                             <input
                                                 type="search"
                                                 value={searchQuery}
-                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                                onChange={(e) =>
+                                                    setSearchQuery(
+                                                        e.target.value,
+                                                    )
+                                                }
                                                 placeholder="Search products..."
-                                                className="w-full rounded-r-[5px] bg-gray-1 border border-l-0 border-gray-3 py-2.5 pl-4 pr-10 text-xs text-dark outline-none focus:border-blue transition"
+                                                className="w-full rounded-r-[5px] border border-l-0 border-gray-3 bg-gray-1 py-2.5 pr-10 pl-4 text-xs text-dark transition outline-none focus:border-blue"
                                             />
                                             <button
                                                 type="submit"
                                                 aria-label="Search"
-                                                className="flex items-center justify-center absolute right-3 top-1/2 -translate-y-1/2 text-dark hover:text-blue transition cursor-pointer"
+                                                className="absolute top-1/2 right-3 flex -translate-y-1/2 cursor-pointer items-center justify-center text-dark transition hover:text-blue"
                                             >
-                                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="fill-current">
+                                                <svg
+                                                    width="18"
+                                                    height="18"
+                                                    viewBox="0 0 18 18"
+                                                    fill="none"
+                                                    className="fill-current"
+                                                >
                                                     <path d="M17.2687 15.6656L12.6281 11.8969C14.5406 9.28123 14.3437 5.5406 11.9531 3.1781C10.6875 1.91248 8.99995 1.20935 7.19995 1.20935C5.39995 1.20935 3.71245 1.91248 2.44683 3.1781C-0.168799 5.79373 -0.168799 10.0687 2.44683 12.6844C3.71245 13.95 5.39995 14.6531 7.19995 14.6531C8.91558 14.6531 10.5187 14.0062 11.7843 12.8531L16.4812 16.65C16.5937 16.7344 16.7343 16.7906 16.875 16.7906C17.0718 16.7906 17.2406 16.7062 17.3531 16.5656C17.5781 16.2844 17.55 15.8906 17.2687 15.6656ZM7.19995 13.3875C5.73745 13.3875 4.38745 12.825 3.34683 11.7844C1.20933 9.64685 1.20933 6.18748 3.34683 4.0781C4.38745 3.03748 5.73745 2.47498 7.19995 2.47498C8.66245 2.47498 10.0125 3.03748 11.0531 4.0781C13.1906 6.2156 13.1906 9.67498 11.0531 11.7844C10.0406 12.825 8.66245 13.3875 7.19995 13.3875Z" />
                                                 </svg>
                                             </button>
@@ -112,9 +157,15 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                         </div>
 
                         {/* Header Top Right */}
-                        <div className="flex w-full lg:w-auto items-center gap-7">
-                            <div className="hidden xl:flex items-center gap-3.5">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-blue">
+                        <div className="flex w-full items-center gap-7 lg:w-auto">
+                            <div className="hidden items-center gap-3.5 xl:flex">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    className="text-blue"
+                                >
                                     <path
                                         fillRule="evenodd"
                                         clipRule="evenodd"
@@ -123,33 +174,48 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                                     />
                                 </svg>
                                 <div>
-                                    <span className="block text-[10px] text-dark-4 uppercase tracking-wider">24/7 SUPPORT</span>
-                                    <a href="tel:+8801704039173" className="font-medium text-xs text-dark hover:text-blue transition">
+                                    <span className="block text-[10px] tracking-wider text-dark-4 uppercase">
+                                        24/7 SUPPORT
+                                    </span>
+                                    <a
+                                        href="tel:+8801704039173"
+                                        className="text-xs font-medium text-dark transition hover:text-blue"
+                                    >
                                         +880 1603-700911
                                     </a>
                                 </div>
                             </div>
 
-                            <span className="hidden xl:block w-px h-7 bg-gray-3"></span>
+                            <span className="hidden h-7 w-px bg-gray-3 xl:block"></span>
 
-                            <div className="flex w-full lg:w-auto justify-between items-center gap-5">
+                            <div className="flex w-full items-center justify-between gap-5 lg:w-auto">
                                 <div className="flex items-center gap-5">
                                     {user ? (
                                         <div className="flex items-center gap-2.5">
-                                            <div className="w-8 h-8 rounded-full bg-blue text-white font-bold text-xs flex items-center justify-center">
+                                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue text-xs font-bold text-white">
                                                 {user.name.charAt(0)}
                                             </div>
                                             <div>
-                                                <span className="block text-[10px] text-dark-4 uppercase tracking-wider font-semibold">
-                                                    {user.role === 'shop_owner' ? 'SHOP MERCHANT' : user.role === 'admin' ? 'ADMIN' : 'CUSTOMER'}
+                                                <span className="block text-[10px] font-semibold tracking-wider text-dark-4 uppercase">
+                                                    {user.role === 'shop_owner'
+                                                        ? 'SHOP MERCHANT'
+                                                        : user.role === 'admin'
+                                                          ? 'ADMIN'
+                                                          : 'CUSTOMER'}
                                                 </span>
                                                 <div className="flex items-center gap-2">
-                                                    <span className="font-medium text-xs text-dark">{user.name.split(' ')[0]}</span>
+                                                    <span className="text-xs font-medium text-dark">
+                                                        {
+                                                            user.name.split(
+                                                                ' ',
+                                                            )[0]
+                                                        }
+                                                    </span>
                                                     <Link
                                                         href="/logout"
                                                         method="post"
                                                         as="button"
-                                                        className="text-[10px] text-rose-600 hover:underline cursor-pointer"
+                                                        className="cursor-pointer text-[10px] text-rose-600 hover:underline"
                                                     >
                                                         Logout
                                                     </Link>
@@ -157,8 +223,16 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                                             </div>
                                         </div>
                                     ) : (
-                                        <Link href="/login" className="flex items-center gap-2.5">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <Link
+                                            href="/login"
+                                            className="flex items-center gap-2.5"
+                                        >
+                                            <svg
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                            >
                                                 <path
                                                     fillRule="evenodd"
                                                     clipRule="evenodd"
@@ -173,15 +247,24 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                                                 />
                                             </svg>
                                             <div>
-                                                <span className="block text-[10px] text-dark-4 uppercase tracking-wider">ACCOUNT</span>
-                                                <p className="font-medium text-xs text-dark">Sign In</p>
+                                                <span className="block text-[10px] tracking-wider text-dark-4 uppercase">
+                                                    ACCOUNT
+                                                </span>
+                                                <p className="text-xs font-medium text-dark">
+                                                    Sign In
+                                                </p>
                                             </div>
                                         </Link>
                                     )}
 
-                                    <div className="flex items-center gap-2.5 cursor-pointer">
-                                        <span className="inline-block relative">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <div className="flex cursor-pointer items-center gap-2.5">
+                                        <span className="relative inline-block">
+                                            <svg
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                            >
                                                 <path
                                                     fillRule="evenodd"
                                                     clipRule="evenodd"
@@ -189,13 +272,17 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                                                     fill="#3C50E0"
                                                 />
                                             </svg>
-                                            <span className="flex items-center justify-center font-medium text-[10px] absolute -right-2 -top-2 bg-blue w-4 h-4 rounded-full text-white">
+                                            <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-blue text-[10px] font-medium text-white">
                                                 0
                                             </span>
                                         </span>
                                         <div>
-                                            <span className="block text-[10px] text-dark-4 uppercase tracking-wider">CART</span>
-                                            <p className="font-medium text-xs text-dark">৳0.00</p>
+                                            <span className="block text-[10px] tracking-wider text-dark-4 uppercase">
+                                                CART
+                                            </span>
+                                            <p className="text-xs font-medium text-dark">
+                                                ৳0.00
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -206,29 +293,54 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
 
                 {/* Header Nav Bar */}
                 <div className="border-t border-gray-3">
-                    <div className="max-w-292.5 mx-auto px-4 sm:px-8 xl:px-0">
+                    <div className="mx-auto max-w-292.5 px-4 sm:px-8 xl:px-0">
                         <div className="flex items-center justify-between">
                             <nav className="flex items-center gap-6 py-4 text-xs font-semibold text-dark">
-                                <Link href="/" className="text-blue border-b-2 border-blue pb-4 -mb-4">
+                                <Link
+                                    href="/"
+                                    className="-mb-4 border-b-2 border-blue pb-4 text-blue"
+                                >
                                     Home
                                 </Link>
 
                                 {/* Shops Dropdown */}
-                                <div className="relative group pb-4 -mb-4">
-                                    <button className="flex items-center gap-1 hover:text-blue transition cursor-pointer">
+                                <div className="group relative -mb-4 pb-4">
+                                    <button className="flex cursor-pointer items-center gap-1 transition hover:text-blue">
                                         <span>Shops</span>
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                        <svg
+                                            width="12"
+                                            height="12"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2.5"
+                                        >
                                             <polyline points="6 9 12 15 18 9"></polyline>
                                         </svg>
                                     </button>
-                                    <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
-                                        <div className="bg-white rounded-lg shadow-lg border border-gray-3 py-2 w-60 text-xs max-h-72 overflow-y-auto">
+                                    <div className="absolute top-full left-0 z-50 hidden pt-2 group-hover:block">
+                                        <div className="max-h-72 w-60 overflow-y-auto rounded-lg border border-gray-3 bg-white py-2 text-xs shadow-lg">
                                             {(allShops && allShops.length > 0
                                                 ? allShops
                                                 : [
-                                                      { id: 1, name: 'Dhanmondi Gadget Hub', slug: 'dhanmondi-gadget-hub', logo: null },
-                                                      { id: 2, name: 'Jamuna Lifestyle & Mart', slug: 'jamuna-lifestyle-mart', logo: null },
-                                                      { id: 3, name: 'Chittagong Digital Zone', slug: 'chittagong-digital-zone', logo: null },
+                                                      {
+                                                          id: 1,
+                                                          name: 'Dhanmondi Gadget Hub',
+                                                          slug: 'dhanmondi-gadget-hub',
+                                                          logo: null,
+                                                      },
+                                                      {
+                                                          id: 2,
+                                                          name: 'Jamuna Lifestyle & Mart',
+                                                          slug: 'jamuna-lifestyle-mart',
+                                                          logo: null,
+                                                      },
+                                                      {
+                                                          id: 3,
+                                                          name: 'Chittagong Digital Zone',
+                                                          slug: 'chittagong-digital-zone',
+                                                          logo: null,
+                                                      },
                                                   ]
                                             ).map((s) => {
                                                 const initials = s.name
@@ -237,31 +349,49 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                                                     .slice(0, 2)
                                                     .join('')
                                                     .toUpperCase();
-                                                const logoSrc = s.logo_url || (s.logo ? (s.logo.startsWith('/') || s.logo.startsWith('http') ? s.logo : `/storage/${s.logo}`) : null);
+                                                const logoSrc =
+                                                    s.logo_url ||
+                                                    (s.logo
+                                                        ? s.logo.startsWith(
+                                                              '/',
+                                                          ) ||
+                                                          s.logo.startsWith(
+                                                              'http',
+                                                          )
+                                                            ? s.logo
+                                                            : `/storage/${s.logo}`
+                                                        : null);
 
                                                 return (
                                                     <Link
                                                         key={s.id}
                                                         href={`/shops/${s.slug}`}
-                                                        className="flex items-center gap-2.5 px-4 py-2 hover:bg-gray-1 text-dark hover:text-blue transition"
+                                                        className="flex items-center gap-2.5 px-4 py-2 text-dark transition hover:bg-gray-1 hover:text-blue"
                                                     >
                                                         {logoSrc ? (
                                                             <img
                                                                 src={logoSrc}
                                                                 alt={s.name}
-                                                                className="w-6 h-6 rounded object-contain border border-gray-2 bg-white shrink-0"
-                                                                onError={(e) => {
-                                                                    const el = e.currentTarget as HTMLImageElement;
-                                                                    el.onerror = null;
-                                                                    el.src = '/images/placeholder-product.svg';
+                                                                className="h-6 w-6 shrink-0 rounded border border-gray-2 bg-white object-contain"
+                                                                onError={(
+                                                                    e,
+                                                                ) => {
+                                                                    const el =
+                                                                        e.currentTarget as HTMLImageElement;
+                                                                    el.onerror =
+                                                                        null;
+                                                                    el.src =
+                                                                        '/images/placeholder-product.svg';
                                                                 }}
                                                             />
                                                         ) : (
-                                                            <span className="w-6 h-6 rounded bg-blue text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                                                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-blue text-[10px] font-bold text-white">
                                                                 {initials}
                                                             </span>
                                                         )}
-                                                        <span className="truncate">{s.name}</span>
+                                                        <span className="truncate">
+                                                            {s.name}
+                                                        </span>
                                                     </Link>
                                                 );
                                             })}
@@ -270,12 +400,18 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
                                 </div>
 
                                 {user?.role === 'shop_owner' && (
-                                    <Link href="/owner/inventory" className="hover:text-blue transition pb-4 -mb-4 text-dark-2">
+                                    <Link
+                                        href="/owner/inventory"
+                                        className="-mb-4 pb-4 text-dark-2 transition hover:text-blue"
+                                    >
                                         Merchant Portal
                                     </Link>
                                 )}
                                 {user?.role === 'admin' && (
-                                    <Link href="/admin" className="hover:text-blue transition pb-4 -mb-4 text-dark-3">
+                                    <Link
+                                        href="/admin"
+                                        className="-mb-4 pb-4 text-dark-3 transition hover:text-blue"
+                                    >
                                         Admin Panel
                                     </Link>
                                 )}
@@ -289,61 +425,152 @@ export default function StorefrontLayout({ children }: StorefrontLayoutProps) {
             <main className="grow">{children}</main>
 
             {/* Authentic Nextmerce Footer */}
-            <footer className="overflow-hidden border-t border-gray-3 pt-16 pb-10 bg-white">
-                <div className="max-w-292.5 mx-auto px-4 sm:px-8 xl:px-0">
-                    <div className="flex flex-wrap xl:flex-nowrap gap-10 xl:gap-20 justify-between pb-12 border-b border-gray-3">
-                        <div className="max-w-82.5 w-full space-y-4">
-                            <img src="/images/logo/csn_logo_transparent.png" alt="CSN Bangladesh Ltd." className="h-8 w-auto object-contain" />
-                            <p className="text-xs text-dark-3 leading-relaxed">
-                                Multi-Vendor E-Commerce Platform with centralized master catalog and independent merchant shop inventories.
+            <footer className="overflow-hidden border-t border-gray-3 bg-white pt-16 pb-10">
+                <div className="mx-auto max-w-292.5 px-4 sm:px-8 xl:px-0">
+                    <div className="flex flex-wrap justify-between gap-10 border-b border-gray-3 pb-12 xl:flex-nowrap xl:gap-20">
+                        <div className="w-full max-w-82.5 space-y-4">
+                            <img
+                                src="/images/logo/csn_logo_transparent.png"
+                                alt="CSN Bangladesh Ltd."
+                                className="h-8 w-auto object-contain"
+                            />
+                            <p className="text-xs leading-relaxed text-dark-3">
+                                Multi-Vendor E-Commerce Platform with
+                                centralized master catalog and independent
+                                merchant shop inventories.
                             </p>
-                            <ul className="space-y-2 text-xs text-dark-3 pt-1">
-                                <li><strong>Hotline:</strong> +880 1603-700911</li>
-                                <li><strong>Email:</strong> support@csnbangladesh.com</li>
-                                <li><strong>Location:</strong> Dhaka, Bangladesh</li>
+                            <ul className="space-y-2 pt-1 text-xs text-dark-3">
+                                <li>
+                                    <strong>Hotline:</strong> +880 1603-700911
+                                </li>
+                                <li>
+                                    <strong>Email:</strong>{' '}
+                                    support@csnbangladesh.com
+                                </li>
+                                <li>
+                                    <strong>Location:</strong> Dhaka, Bangladesh
+                                </li>
                             </ul>
                         </div>
 
-                        <div className="w-full xl:w-auto flex flex-wrap sm:flex-nowrap gap-10 sm:gap-20 justify-between">
+                        <div className="flex w-full flex-wrap justify-between gap-10 sm:flex-nowrap sm:gap-20 xl:w-auto">
                             <div>
-                                <h4 className="font-semibold text-sm text-dark mb-4 uppercase tracking-wider">Verified Shops</h4>
+                                <h4 className="mb-4 text-sm font-semibold tracking-wider text-dark uppercase">
+                                    Verified Shops
+                                </h4>
                                 <ul className="space-y-2.5 text-xs text-dark-3">
-                                    <li><Link href="/shops/dhanmondi-gadget-hub" className="hover:text-blue transition">Dhanmondi Gadget Hub</Link></li>
-                                    <li><Link href="/shops/jamuna-lifestyle-mart" className="hover:text-blue transition">Jamuna Lifestyle & Mart</Link></li>
-                                    <li><Link href="/shops/chittagong-digital-zone" className="hover:text-blue transition">Chittagong Digital Zone</Link></li>
+                                    <li>
+                                        <Link
+                                            href="/shops/dhanmondi-gadget-hub"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Dhanmondi Gadget Hub
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/shops/jamuna-lifestyle-mart"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Jamuna Lifestyle & Mart
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/shops/chittagong-digital-zone"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Chittagong Digital Zone
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
 
                             <div>
-                                <h4 className="font-semibold text-sm text-dark mb-4 uppercase tracking-wider">Merchant Portal</h4>
+                                <h4 className="mb-4 text-sm font-semibold tracking-wider text-dark uppercase">
+                                    Merchant Portal
+                                </h4>
                                 <ul className="space-y-2.5 text-xs text-dark-3">
-                                    <li><Link href="/owner/inventory" className="hover:text-blue transition">My Shop Inventory</Link></li>
-                                    <li><Link href="/owner/catalog" className="hover:text-blue transition">Shared Master Catalog</Link></li>
-                                    <li><Link href="/login" className="hover:text-blue transition">Merchant Login</Link></li>
+                                    <li>
+                                        <Link
+                                            href="/owner/inventory"
+                                            className="transition hover:text-blue"
+                                        >
+                                            My Shop Inventory
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/owner/catalog"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Shared Master Catalog
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/login"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Merchant Login
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
 
                             <div>
-                                <h4 className="font-semibold text-sm text-dark mb-4 uppercase tracking-wider">Admin Console</h4>
+                                <h4 className="mb-4 text-sm font-semibold tracking-wider text-dark uppercase">
+                                    Admin Console
+                                </h4>
                                 <ul className="space-y-2.5 text-xs text-dark-3">
-                                    <li><Link href="/admin" className="hover:text-blue transition">Dashboard Overview</Link></li>
-                                    <li><Link href="/admin/shops" className="hover:text-blue transition">Shop Management</Link></li>
-                                    <li><Link href="/admin/catalog" className="hover:text-blue transition">Master Catalog</Link></li>
-                                    <li><Link href="/admin/categories" className="hover:text-blue transition">Categories</Link></li>
+                                    <li>
+                                        <Link
+                                            href="/admin"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Dashboard Overview
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/admin/shops"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Shop Management
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/admin/catalog"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Master Catalog
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href="/admin/categories"
+                                            className="transition hover:text-blue"
+                                        >
+                                            Categories
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-between pt-8 gap-4 text-xs text-dark-4">
-                        <p>&copy; 2026 CSN Bangladesh Ltd. All rights reserved.</p>
+                    <div className="flex flex-col items-center justify-between gap-4 pt-8 text-xs text-dark-4 sm:flex-row">
+                        <p>
+                            &copy; 2026 CSN Bangladesh Ltd. All rights reserved.
+                        </p>
                         <p className="flex items-center gap-1.5">
                             <span>Developed by</span>
                             <a
                                 href="https://kaziomar.vercel.app"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-semibold text-dark hover:text-blue transition underline decoration-gray-300 underline-offset-4"
+                                className="font-semibold text-dark underline decoration-gray-300 underline-offset-4 transition hover:text-blue"
                             >
                                 Kazi Omar Faruk
                             </a>

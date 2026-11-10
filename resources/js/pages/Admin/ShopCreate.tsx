@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AdminLayout from '@/layouts/AdminLayout';
-import { ArrowLeft, Store, User, UserPlus, CheckCircle2, ShieldCheck, Upload, X } from 'lucide-react';
+import {
+    ArrowLeft,
+    Store,
+    User,
+    UserPlus,
+    ShieldCheck,
+    Upload,
+} from 'lucide-react';
 import type { User as UserType } from '@/types/ecommerce';
 
 interface ShopCreateProps {
@@ -68,123 +75,164 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
         <AdminLayout title="Register New Merchant Shop">
             <Head title="Register New Shop | Admin Console" />
 
-            <div className="max-w-4xl mx-auto space-y-6">
+            <div className="mx-auto max-w-4xl space-y-6">
                 {/* Header & Breadcrumbs */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
-                        <div className="text-xs text-dark-4 mb-1">
-                            <Link href="/admin/shops" className="hover:underline">
+                        <div className="mb-1 text-xs text-dark-4">
+                            <Link
+                                href="/admin/shops"
+                                className="hover:underline"
+                            >
                                 Shops Management
                             </Link>{' '}
                             / <span>Register Shop</span>
                         </div>
-                        <h1 className="text-2xl font-bold tracking-tight text-dark">Register Shop</h1>
+                        <h1 className="text-2xl font-bold tracking-tight text-dark">
+                            Register Shop
+                        </h1>
                     </div>
 
                     <Link
                         href="/admin/shops"
-                        className="self-start sm:self-auto px-3.5 py-2 rounded-lg border border-gray-3 bg-white text-dark-3 hover:text-dark hover:bg-gray-50 text-xs font-medium transition flex items-center gap-1.5 shadow-2xs"
+                        className="flex items-center gap-1.5 self-start rounded-lg border border-gray-3 bg-white px-3.5 py-2 text-xs font-medium text-dark-3 shadow-2xs transition hover:bg-gray-50 hover:text-dark sm:self-auto"
                     >
-                        <ArrowLeft className="w-3.5 h-3.5" />
+                        <ArrowLeft className="h-3.5 w-3.5" />
                         <span>Back to Shops</span>
                     </Link>
                 </div>
 
                 {/* Form Card */}
-                <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-gray-3 p-6 sm:p-8 space-y-6 shadow-sm">
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-6 rounded-xl border border-gray-3 bg-white p-6 shadow-sm sm:p-8"
+                >
                     {/* Basic Shop Info */}
                     <div>
-                        <h2 className="text-sm font-bold text-dark mb-4 flex items-center gap-2 pb-2 border-b border-gray-100">
-                            <Store className="w-4 h-4 text-blue" />
+                        <h2 className="mb-4 flex items-center gap-2 border-b border-gray-100 pb-2 text-sm font-bold text-dark">
+                            <Store className="h-4 w-4 text-blue" />
                             <span>Shop Details</span>
                         </h2>
 
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-xs font-semibold text-dark mb-1.5">
-                                    Shop Name <span className="text-rose-600">*</span>
+                                <label className="mb-1.5 block text-xs font-semibold text-dark">
+                                    Shop Name{' '}
+                                    <span className="text-rose-600">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     required
                                     placeholder="e.g. Uttara Tech Universe"
                                     value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
-                                    className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition font-medium"
+                                    onChange={(e) =>
+                                        setData('name', e.target.value)
+                                    }
+                                    className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm font-medium text-dark transition focus:border-blue focus:outline-none"
                                 />
-                                {errors.name && <span className="text-rose-600 text-[11px]">{errors.name}</span>}
+                                {errors.name && (
+                                    <span className="text-[11px] text-rose-600">
+                                        {errors.name}
+                                    </span>
+                                )}
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
-                                    <label className="block text-xs font-semibold text-dark mb-1.5">
+                                    <label className="mb-1.5 block text-xs font-semibold text-dark">
                                         Phone Hotline
                                     </label>
                                     <input
                                         type="text"
                                         placeholder="e.g. +880 1700-000000"
                                         value={data.phone}
-                                        onChange={(e) => setData('phone', e.target.value)}
-                                        className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                        onChange={(e) =>
+                                            setData('phone', e.target.value)
+                                        }
+                                        className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
                                     />
-                                    {errors.phone && <span className="text-rose-600 text-[11px]">{errors.phone}</span>}
+                                    {errors.phone && (
+                                        <span className="text-[11px] text-rose-600">
+                                            {errors.phone}
+                                        </span>
+                                    )}
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-semibold text-dark mb-1.5">
+                                    <label className="mb-1.5 block text-xs font-semibold text-dark">
                                         Shop Contact Email
                                     </label>
                                     <input
                                         type="email"
                                         placeholder="e.g. contact@uttaratech.com"
                                         value={data.email}
-                                        onChange={(e) => setData('email', e.target.value)}
-                                        className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                        onChange={(e) =>
+                                            setData('email', e.target.value)
+                                        }
+                                        className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
                                     />
-                                    {errors.email && <span className="text-rose-600 text-[11px]">{errors.email}</span>}
+                                    {errors.email && (
+                                        <span className="text-[11px] text-rose-600">
+                                            {errors.email}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-xs font-semibold text-dark mb-1.5">
+                                <label className="mb-1.5 block text-xs font-semibold text-dark">
                                     Physical Address / Hub Location
                                 </label>
                                 <input
                                     type="text"
                                     placeholder="e.g. Sector 7, Uttara, Dhaka, Bangladesh"
                                     value={data.address}
-                                    onChange={(e) => setData('address', e.target.value)}
-                                    className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                    onChange={(e) =>
+                                        setData('address', e.target.value)
+                                    }
+                                    className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
                                 />
-                                {errors.address && <span className="text-rose-600 text-[11px]">{errors.address}</span>}
+                                {errors.address && (
+                                    <span className="text-[11px] text-rose-600">
+                                        {errors.address}
+                                    </span>
+                                )}
                             </div>
 
                             <div>
-                                <label className="block text-xs font-semibold text-dark mb-1.5">
+                                <label className="mb-1.5 block text-xs font-semibold text-dark">
                                     Description / Specialty
                                 </label>
                                 <textarea
                                     rows={3}
                                     placeholder="Brief overview of shop specialty, warranty support, and target area..."
                                     value={data.description}
-                                    onChange={(e) => setData('description', e.target.value)}
-                                    className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                    onChange={(e) =>
+                                        setData('description', e.target.value)
+                                    }
+                                    className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
                                 />
-                                {errors.description && <span className="text-rose-600 text-[11px]">{errors.description}</span>}
+                                {errors.description && (
+                                    <span className="text-[11px] text-rose-600">
+                                        {errors.description}
+                                    </span>
+                                )}
                             </div>
 
                             {/* Logo & Banner Uploads */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <div className="grid grid-cols-1 gap-4 pt-2 md:grid-cols-2">
                                 <div>
-                                    <label className="block text-xs font-semibold text-dark mb-1.5">Shop Logo</label>
+                                    <label className="mb-1.5 block text-xs font-semibold text-dark">
+                                        Shop Logo
+                                    </label>
                                     {logoPreview ? (
-                                        <div className="flex items-center gap-3 p-2.5 border border-gray-3 rounded-lg bg-gray-50">
+                                        <div className="flex items-center gap-3 rounded-lg border border-gray-3 bg-gray-50 p-2.5">
                                             <img
                                                 src={logoPreview}
                                                 alt="Logo preview"
-                                                className="w-14 h-14 object-contain rounded border border-gray-200 bg-white p-1"
+                                                className="h-14 w-14 rounded border border-gray-200 bg-white object-contain p-1"
                                             />
-                                            <label className="px-3 py-1.5 rounded border border-gray-300 bg-white text-xs font-medium hover:border-blue hover:text-blue cursor-pointer transition">
+                                            <label className="cursor-pointer rounded border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium transition hover:border-blue hover:text-blue">
                                                 Change Logo
                                                 <input
                                                     type="file"
@@ -195,9 +243,11 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
                                             </label>
                                         </div>
                                     ) : (
-                                        <label className="border-2 border-dashed border-gray-3 hover:border-blue rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-gray-50/50 transition">
-                                            <Upload className="w-5 h-5 text-gray-400 mb-1" />
-                                            <span className="text-xs font-medium text-dark">Upload Shop Logo</span>
+                                        <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-3 bg-gray-50/50 p-4 transition hover:border-blue">
+                                            <Upload className="mb-1 h-5 w-5 text-gray-400" />
+                                            <span className="text-xs font-medium text-dark">
+                                                Upload Shop Logo
+                                            </span>
                                             <input
                                                 type="file"
                                                 accept="image/*"
@@ -206,32 +256,42 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
                                             />
                                         </label>
                                     )}
-                                    {errors.logo && <span className="text-rose-600 text-[11px]">{errors.logo}</span>}
+                                    {errors.logo && (
+                                        <span className="text-[11px] text-rose-600">
+                                            {errors.logo}
+                                        </span>
+                                    )}
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-semibold text-dark mb-1.5">Shop Banner</label>
+                                    <label className="mb-1.5 block text-xs font-semibold text-dark">
+                                        Shop Banner
+                                    </label>
                                     {bannerPreview ? (
-                                        <div className="flex items-center gap-3 p-2.5 border border-gray-3 rounded-lg bg-gray-50">
+                                        <div className="flex items-center gap-3 rounded-lg border border-gray-3 bg-gray-50 p-2.5">
                                             <img
                                                 src={bannerPreview}
                                                 alt="Banner preview"
-                                                className="w-24 h-14 object-cover rounded border border-gray-200"
+                                                className="h-14 w-24 rounded border border-gray-200 object-cover"
                                             />
-                                            <label className="px-3 py-1.5 rounded border border-gray-300 bg-white text-xs font-medium hover:border-blue hover:text-blue cursor-pointer transition">
+                                            <label className="cursor-pointer rounded border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium transition hover:border-blue hover:text-blue">
                                                 Change Banner
                                                 <input
                                                     type="file"
                                                     accept="image/*"
-                                                    onChange={handleBannerChange}
+                                                    onChange={
+                                                        handleBannerChange
+                                                    }
                                                     className="hidden"
                                                 />
                                             </label>
                                         </div>
                                     ) : (
-                                        <label className="border-2 border-dashed border-gray-3 hover:border-blue rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-gray-50/50 transition">
-                                            <Upload className="w-5 h-5 text-gray-400 mb-1" />
-                                            <span className="text-xs font-medium text-dark">Upload Shop Banner</span>
+                                        <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-3 bg-gray-50/50 p-4 transition hover:border-blue">
+                                            <Upload className="mb-1 h-5 w-5 text-gray-400" />
+                                            <span className="text-xs font-medium text-dark">
+                                                Upload Shop Banner
+                                            </span>
                                             <input
                                                 type="file"
                                                 accept="image/*"
@@ -240,7 +300,11 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
                                             />
                                         </label>
                                     )}
-                                    {errors.banner && <span className="text-rose-600 text-[11px]">{errors.banner}</span>}
+                                    {errors.banner && (
+                                        <span className="text-[11px] text-rose-600">
+                                            {errors.banner}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -248,115 +312,163 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
 
                     {/* Shop Owner Credentials */}
                     <div className="pt-2">
-                        <h2 className="text-sm font-bold text-dark mb-4 flex items-center gap-2 pb-2 border-b border-gray-100">
-                            <ShieldCheck className="w-4 h-4 text-blue" />
+                        <h2 className="mb-4 flex items-center gap-2 border-b border-gray-100 pb-2 text-sm font-bold text-dark">
+                            <ShieldCheck className="h-4 w-4 text-blue" />
                             <span>Shop Owner Account Assignment</span>
                         </h2>
 
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="mb-4 flex items-center gap-3">
                             <button
                                 type="button"
                                 onClick={() => setOwnerMode('existing')}
-                                className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+                                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition ${
                                     ownerMode === 'existing'
                                         ? 'bg-blue text-white shadow-2xs'
-                                        : 'bg-gray-1 text-dark-3 hover:bg-gray-2 border border-gray-3'
+                                        : 'border border-gray-3 bg-gray-1 text-dark-3 hover:bg-gray-2'
                                 }`}
                             >
-                                <User className="w-3.5 h-3.5" />
+                                <User className="h-3.5 w-3.5" />
                                 <span>Assign Existing Owner</span>
                             </button>
 
                             <button
                                 type="button"
                                 onClick={() => setOwnerMode('new')}
-                                className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+                                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition ${
                                     ownerMode === 'new'
                                         ? 'bg-blue text-white shadow-2xs'
-                                        : 'bg-gray-1 text-dark-3 hover:bg-gray-2 border border-gray-3'
+                                        : 'border border-gray-3 bg-gray-1 text-dark-3 hover:bg-gray-2'
                                 }`}
                             >
-                                <UserPlus className="w-3.5 h-3.5" />
+                                <UserPlus className="h-3.5 w-3.5" />
                                 <span>Create New Owner Account</span>
                             </button>
                         </div>
 
                         {ownerMode === 'existing' ? (
                             <div>
-                                <label className="block text-xs font-semibold text-dark mb-1.5">
-                                    Select Registered Shop Owner <span className="text-rose-600">*</span>
+                                <label className="mb-1.5 block text-xs font-semibold text-dark">
+                                    Select Registered Shop Owner{' '}
+                                    <span className="text-rose-600">*</span>
                                 </label>
                                 {availableOwners.length > 0 ? (
                                     <select
                                         value={data.user_id}
-                                        onChange={(e) => setData('user_id', e.target.value)}
-                                        className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                        onChange={(e) =>
+                                            setData('user_id', e.target.value)
+                                        }
+                                        className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
                                     >
-                                        <option value="">-- Choose an existing owner account --</option>
+                                        <option value="">
+                                            -- Choose an existing owner account
+                                            --
+                                        </option>
                                         {availableOwners.map((owner) => (
-                                            <option key={owner.id} value={owner.id}>
+                                            <option
+                                                key={owner.id}
+                                                value={owner.id}
+                                            >
                                                 {owner.name} ({owner.email})
                                             </option>
                                         ))}
                                     </select>
                                 ) : (
-                                    <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
-                                        All current shop owners are already assigned. Switch to <strong>"Create New Owner Account"</strong> to register a new merchant credentials.
+                                    <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+                                        All current shop owners are already
+                                        assigned. Switch to{' '}
+                                        <strong>
+                                            "Create New Owner Account"
+                                        </strong>{' '}
+                                        to register a new merchant credentials.
                                     </div>
                                 )}
-                                {errors.user_id && <span className="text-rose-600 text-[11px]">{errors.user_id}</span>}
+                                {errors.user_id && (
+                                    <span className="text-[11px] text-rose-600">
+                                        {errors.user_id}
+                                    </span>
+                                )}
                             </div>
                         ) : (
-                            <div className="p-4 bg-gray-1 rounded-xl border border-gray-3 space-y-4">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-4 rounded-xl border border-gray-3 bg-gray-1 p-4">
+                                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                     <div>
-                                        <label className="block text-xs font-semibold text-dark mb-1.5">
-                                            Owner Full Name <span className="text-rose-600">*</span>
+                                        <label className="mb-1.5 block text-xs font-semibold text-dark">
+                                            Owner Full Name{' '}
+                                            <span className="text-rose-600">
+                                                *
+                                            </span>
                                         </label>
                                         <input
                                             type="text"
                                             required={ownerMode === 'new'}
                                             placeholder="e.g. Mahfuz Rahman"
                                             value={data.new_owner_name}
-                                            onChange={(e) => setData('new_owner_name', e.target.value)}
-                                            className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                            onChange={(e) =>
+                                                setData(
+                                                    'new_owner_name',
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2 text-sm text-dark transition focus:border-blue focus:outline-none"
                                         />
                                         {errors.new_owner_name && (
-                                            <span className="text-rose-600 text-[11px]">{errors.new_owner_name}</span>
+                                            <span className="text-[11px] text-rose-600">
+                                                {errors.new_owner_name}
+                                            </span>
                                         )}
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs font-semibold text-dark mb-1.5">
-                                            Owner Email Address <span className="text-rose-600">*</span>
+                                        <label className="mb-1.5 block text-xs font-semibold text-dark">
+                                            Owner Email Address{' '}
+                                            <span className="text-rose-600">
+                                                *
+                                            </span>
                                         </label>
                                         <input
                                             type="email"
                                             required={ownerMode === 'new'}
                                             placeholder="e.g. mahfuz@uttaratech.com"
                                             value={data.new_owner_email}
-                                            onChange={(e) => setData('new_owner_email', e.target.value)}
-                                            className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                            onChange={(e) =>
+                                                setData(
+                                                    'new_owner_email',
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2 text-sm text-dark transition focus:border-blue focus:outline-none"
                                         />
                                         {errors.new_owner_email && (
-                                            <span className="text-rose-600 text-[11px]">{errors.new_owner_email}</span>
+                                            <span className="text-[11px] text-rose-600">
+                                                {errors.new_owner_email}
+                                            </span>
                                         )}
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-semibold text-dark mb-1.5">
-                                        Login Password <span className="text-dark-4 font-normal">(default: password)</span>
+                                    <label className="mb-1.5 block text-xs font-semibold text-dark">
+                                        Login Password{' '}
+                                        <span className="font-normal text-dark-4">
+                                            (default: password)
+                                        </span>
                                     </label>
                                     <input
                                         type="password"
                                         placeholder="Min 6 characters"
                                         value={data.new_owner_password}
-                                        onChange={(e) => setData('new_owner_password', e.target.value)}
-                                        className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                        onChange={(e) =>
+                                            setData(
+                                                'new_owner_password',
+                                                e.target.value,
+                                            )
+                                        }
+                                        className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2 text-sm text-dark transition focus:border-blue focus:outline-none"
                                     />
                                     {errors.new_owner_password && (
-                                        <span className="text-rose-600 text-[11px]">{errors.new_owner_password}</span>
+                                        <span className="text-[11px] text-rose-600">
+                                            {errors.new_owner_password}
+                                        </span>
                                     )}
                                 </div>
                             </div>
@@ -364,13 +476,15 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
                     </div>
 
                     {/* Status & Options */}
-                    <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
-                        <label className="flex items-center gap-2.5 cursor-pointer">
+                    <div className="flex items-center justify-between border-t border-gray-100 pt-2">
+                        <label className="flex cursor-pointer items-center gap-2.5">
                             <input
                                 type="checkbox"
                                 checked={data.is_active}
-                                onChange={(e) => setData('is_active', e.target.checked)}
-                                className="w-4 h-4 rounded border-gray-3 text-blue focus:ring-blue cursor-pointer"
+                                onChange={(e) =>
+                                    setData('is_active', e.target.checked)
+                                }
+                                className="h-4 w-4 cursor-pointer rounded border-gray-3 text-blue focus:ring-blue"
                             />
                             <span className="text-xs font-semibold text-dark">
                                 Active Shop
@@ -379,20 +493,24 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
                     </div>
 
                     {/* Submit Actions */}
-                    <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-3">
+                    <div className="flex items-center justify-end gap-3 border-t border-gray-3 pt-4">
                         <Link
                             href="/admin/shops"
-                            className="px-5 py-2.5 rounded-lg border border-gray-3 bg-white text-dark-3 hover:bg-gray-50 text-xs font-medium transition cursor-pointer"
+                            className="cursor-pointer rounded-lg border border-gray-3 bg-white px-5 py-2.5 text-xs font-medium text-dark-3 transition hover:bg-gray-50"
                         >
                             Cancel
                         </Link>
                         <button
                             type="submit"
                             disabled={processing}
-                            className="px-6 py-2.5 rounded-lg bg-blue hover:bg-blue-dark text-white text-xs font-semibold transition flex items-center gap-2 shadow-2xs cursor-pointer disabled:opacity-70"
+                            className="flex cursor-pointer items-center gap-2 rounded-lg bg-blue px-6 py-2.5 text-xs font-semibold text-white shadow-2xs transition hover:bg-blue-dark disabled:opacity-70"
                         >
-                            <Store className="w-4 h-4" />
-                            <span>{processing ? 'Registering...' : 'Register Shop'}</span>
+                            <Store className="h-4 w-4" />
+                            <span>
+                                {processing
+                                    ? 'Registering...'
+                                    : 'Register Shop'}
+                            </span>
                         </button>
                     </div>
                 </form>

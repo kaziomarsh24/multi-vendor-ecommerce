@@ -9,7 +9,11 @@ interface EditShopModalProps {
     onClose: () => void;
 }
 
-export default function EditShopModal({ shop, availableOwners, onClose }: EditShopModalProps) {
+export default function EditShopModal({
+    shop,
+    availableOwners,
+    onClose,
+}: EditShopModalProps) {
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [bannerPreview, setBannerPreview] = useState<string | null>(null);
 
@@ -90,81 +94,123 @@ export default function EditShopModal({ shop, availableOwners, onClose }: EditSh
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-gray-100 max-h-[90vh] overflow-y-auto">
-                <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
+            <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-gray-100 bg-white p-6 shadow-xl">
+                <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3">
                     <div>
-                        <h3 className="text-base font-bold text-gray-900">Edit Shop Details</h3>
+                        <h3 className="text-base font-bold text-gray-900">
+                            Edit Shop Details
+                        </h3>
                         <p className="text-xs text-gray-500">{shop.name}</p>
                     </div>
                     <button
                         type="button"
                         onClick={handleClose}
-                        className="text-gray-400 hover:text-gray-600 p-1 rounded-lg"
+                        className="rounded-lg p-1 text-gray-400 hover:text-gray-600"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">Shop Name *</label>
+                        <label className="mb-1 block font-semibold text-gray-700">
+                            Shop Name *
+                        </label>
                         <input
                             type="text"
                             required
                             value={editForm.data.name}
-                            onChange={(e) => editForm.setData('name', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue outline-none"
+                            onChange={(e) =>
+                                editForm.setData('name', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue"
                         />
-                        {editForm.errors.name && <span className="text-rose-600 text-[11px]">{editForm.errors.name}</span>}
+                        {editForm.errors.name && (
+                            <span className="text-[11px] text-rose-600">
+                                {editForm.errors.name}
+                            </span>
+                        )}
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">Contact Email</label>
+                            <label className="mb-1 block font-semibold text-gray-700">
+                                Contact Email
+                            </label>
                             <input
                                 type="email"
                                 placeholder="e.g. contact@shop.com"
                                 value={editForm.data.email}
-                                onChange={(e) => editForm.setData('email', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue outline-none"
+                                onChange={(e) =>
+                                    editForm.setData('email', e.target.value)
+                                }
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue"
                             />
-                            {editForm.errors.email && <span className="text-rose-600 text-[11px]">{editForm.errors.email}</span>}
+                            {editForm.errors.email && (
+                                <span className="text-[11px] text-rose-600">
+                                    {editForm.errors.email}
+                                </span>
+                            )}
                         </div>
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">Phone</label>
+                            <label className="mb-1 block font-semibold text-gray-700">
+                                Phone
+                            </label>
                             <input
                                 type="text"
                                 value={editForm.data.phone}
-                                onChange={(e) => editForm.setData('phone', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue outline-none"
+                                onChange={(e) =>
+                                    editForm.setData('phone', e.target.value)
+                                }
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue"
                             />
-                            {editForm.errors.phone && <span className="text-rose-600 text-[11px]">{editForm.errors.phone}</span>}
+                            {editForm.errors.phone && (
+                                <span className="text-[11px] text-rose-600">
+                                    {editForm.errors.phone}
+                                </span>
+                            )}
                         </div>
                     </div>
 
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">Physical Address</label>
+                        <label className="mb-1 block font-semibold text-gray-700">
+                            Physical Address
+                        </label>
                         <input
                             type="text"
                             value={editForm.data.address}
-                            onChange={(e) => editForm.setData('address', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue outline-none"
+                            onChange={(e) =>
+                                editForm.setData('address', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue"
                         />
-                        {editForm.errors.address && <span className="text-rose-600 text-[11px]">{editForm.errors.address}</span>}
+                        {editForm.errors.address && (
+                            <span className="text-[11px] text-rose-600">
+                                {editForm.errors.address}
+                            </span>
+                        )}
                     </div>
 
                     {/* Owner Assignment */}
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">Assigned Shop Owner</label>
+                        <label className="mb-1 block font-semibold text-gray-700">
+                            Assigned Shop Owner
+                        </label>
                         <select
                             value={editForm.data.user_id}
-                            onChange={(e) => editForm.setData('user_id', Number(e.target.value))}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue outline-none bg-white"
+                            onChange={(e) =>
+                                editForm.setData(
+                                    'user_id',
+                                    Number(e.target.value),
+                                )
+                            }
+                            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue"
                         >
                             {shop.owner && (
                                 <option value={shop.owner.id}>
-                                    {shop.owner.name} ({shop.owner.email}) [Current Owner]
+                                    {shop.owner.name} ({shop.owner.email})
+                                    [Current Owner]
                                 </option>
                             )}
                             {availableOwners
@@ -178,17 +224,19 @@ export default function EditShopModal({ shop, availableOwners, onClose }: EditSh
                     </div>
 
                     {/* Logo & Banner Uploads with Preview */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    <div className="grid grid-cols-1 gap-3 pt-1 sm:grid-cols-2">
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">Shop Logo</label>
+                            <label className="mb-1 block font-semibold text-gray-700">
+                                Shop Logo
+                            </label>
                             {logoPreview ? (
-                                <div className="flex items-center gap-2.5 p-2 border border-gray-200 rounded-lg bg-gray-50">
+                                <div className="flex items-center gap-2.5 rounded-lg border border-gray-200 bg-gray-50 p-2">
                                     <img
                                         src={logoPreview}
                                         alt="Logo preview"
-                                        className="w-12 h-12 object-contain rounded border border-gray-200 bg-white p-1"
+                                        className="h-12 w-12 rounded border border-gray-200 bg-white object-contain p-1"
                                     />
-                                    <label className="px-2.5 py-1.5 rounded border border-gray-300 bg-white text-[11px] font-medium hover:border-blue hover:text-blue cursor-pointer transition">
+                                    <label className="cursor-pointer rounded border border-gray-300 bg-white px-2.5 py-1.5 text-[11px] font-medium transition hover:border-blue hover:text-blue">
                                         Change
                                         <input
                                             type="file"
@@ -199,9 +247,11 @@ export default function EditShopModal({ shop, availableOwners, onClose }: EditSh
                                     </label>
                                 </div>
                             ) : (
-                                <label className="border-2 border-dashed border-gray-300 hover:border-blue rounded-lg p-3 flex flex-col items-center justify-center cursor-pointer bg-gray-50/50 transition">
-                                    <Upload className="w-4 h-4 text-gray-400 mb-1" />
-                                    <span className="text-[11px] font-medium text-gray-600">Upload logo</span>
+                                <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50/50 p-3 transition hover:border-blue">
+                                    <Upload className="mb-1 h-4 w-4 text-gray-400" />
+                                    <span className="text-[11px] font-medium text-gray-600">
+                                        Upload logo
+                                    </span>
                                     <input
                                         type="file"
                                         accept="image/*"
@@ -213,15 +263,17 @@ export default function EditShopModal({ shop, availableOwners, onClose }: EditSh
                         </div>
 
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">Shop Banner</label>
+                            <label className="mb-1 block font-semibold text-gray-700">
+                                Shop Banner
+                            </label>
                             {bannerPreview ? (
-                                <div className="flex items-center gap-2.5 p-2 border border-gray-200 rounded-lg bg-gray-50">
+                                <div className="flex items-center gap-2.5 rounded-lg border border-gray-200 bg-gray-50 p-2">
                                     <img
                                         src={bannerPreview}
                                         alt="Banner preview"
-                                        className="w-16 h-12 object-cover rounded border border-gray-200"
+                                        className="h-12 w-16 rounded border border-gray-200 object-cover"
                                     />
-                                    <label className="px-2.5 py-1.5 rounded border border-gray-300 bg-white text-[11px] font-medium hover:border-blue hover:text-blue cursor-pointer transition">
+                                    <label className="cursor-pointer rounded border border-gray-300 bg-white px-2.5 py-1.5 text-[11px] font-medium transition hover:border-blue hover:text-blue">
                                         Change
                                         <input
                                             type="file"
@@ -232,9 +284,11 @@ export default function EditShopModal({ shop, availableOwners, onClose }: EditSh
                                     </label>
                                 </div>
                             ) : (
-                                <label className="border-2 border-dashed border-gray-300 hover:border-blue rounded-lg p-3 flex flex-col items-center justify-center cursor-pointer bg-gray-50/50 transition">
-                                    <Upload className="w-4 h-4 text-gray-400 mb-1" />
-                                    <span className="text-[11px] font-medium text-gray-600">Upload banner</span>
+                                <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50/50 p-3 transition hover:border-blue">
+                                    <Upload className="mb-1 h-4 w-4 text-gray-400" />
+                                    <span className="text-[11px] font-medium text-gray-600">
+                                        Upload banner
+                                    </span>
                                     <input
                                         type="file"
                                         accept="image/*"
@@ -247,12 +301,16 @@ export default function EditShopModal({ shop, availableOwners, onClose }: EditSh
                     </div>
 
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">Description</label>
+                        <label className="mb-1 block font-semibold text-gray-700">
+                            Description
+                        </label>
                         <textarea
                             rows={2}
                             value={editForm.data.description}
-                            onChange={(e) => editForm.setData('description', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue outline-none"
+                            onChange={(e) =>
+                                editForm.setData('description', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue"
                         />
                     </div>
 
@@ -261,29 +319,38 @@ export default function EditShopModal({ shop, availableOwners, onClose }: EditSh
                             type="checkbox"
                             id="edit_is_active"
                             checked={editForm.data.is_active}
-                            onChange={(e) => editForm.setData('is_active', e.target.checked)}
-                            className="rounded border-gray-300 text-blue focus:ring-blue cursor-pointer"
+                            onChange={(e) =>
+                                editForm.setData('is_active', e.target.checked)
+                            }
+                            className="cursor-pointer rounded border-gray-300 text-blue focus:ring-blue"
                         />
-                        <label htmlFor="edit_is_active" className="font-semibold text-gray-800 cursor-pointer">
+                        <label
+                            htmlFor="edit_is_active"
+                            className="cursor-pointer font-semibold text-gray-800"
+                        >
                             Active
                         </label>
                     </div>
 
-                    <div className="pt-3 border-t border-gray-100 flex items-center justify-end gap-3">
+                    <div className="flex items-center justify-end gap-3 border-t border-gray-100 pt-3">
                         <button
                             type="button"
                             onClick={handleClose}
-                            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 cursor-pointer"
+                            className="cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={editForm.processing}
-                            className="bg-blue hover:bg-blue-dark text-white px-5 py-2 rounded-lg font-semibold flex items-center gap-1.5 shadow-sm cursor-pointer disabled:opacity-70"
+                            className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-blue px-5 py-2 font-semibold text-white shadow-sm hover:bg-blue-dark disabled:opacity-70"
                         >
-                            <Save className="w-4 h-4" />
-                            <span>{editForm.processing ? 'Saving...' : 'Save Changes'}</span>
+                            <Save className="h-4 w-4" />
+                            <span>
+                                {editForm.processing
+                                    ? 'Saving...'
+                                    : 'Save Changes'}
+                            </span>
                         </button>
                     </div>
                 </form>

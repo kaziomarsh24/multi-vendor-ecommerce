@@ -35,43 +35,52 @@ export default function Home({
 
             {/* Category / Keyword Search Results */}
             {isSearching ? (
-                <section className="pt-8 pb-16 bg-gray-1">
-                    <div className="max-w-292.5 w-full mx-auto px-4 sm:px-8 xl:px-0">
-                        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <section className="bg-gray-1 pt-8 pb-16">
+                    <div className="mx-auto w-full max-w-292.5 px-4 sm:px-8 xl:px-0">
+                        <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                             <div>
-                                <span className="text-xs font-bold uppercase tracking-wider text-blue block mb-1">
+                                <span className="mb-1 block text-xs font-bold tracking-wider text-blue uppercase">
                                     Products
                                 </span>
                                 <h2 className="text-2xl font-bold text-dark">
-                                    {searchQuery ? `Results for "${searchQuery}"` : 'Filtered Products'}
-                                    <span className="text-sm font-normal text-dark-4 ml-2">
-                                        ({searchResults.length} {searchResults.length === 1 ? 'product' : 'products'} found)
+                                    {searchQuery
+                                        ? `Results for "${searchQuery}"`
+                                        : 'Filtered Products'}
+                                    <span className="ml-2 text-sm font-normal text-dark-4">
+                                        ({searchResults.length}{' '}
+                                        {searchResults.length === 1
+                                            ? 'product'
+                                            : 'products'}{' '}
+                                        found)
                                     </span>
                                 </h2>
                             </div>
                             <Link
                                 href="/"
-                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white border border-gray-3 text-xs font-semibold text-dark hover:text-blue hover:border-blue transition shadow-2xs self-start sm:self-auto"
+                                className="inline-flex items-center gap-1.5 self-start rounded-lg border border-gray-3 bg-white px-4 py-2 text-xs font-semibold text-dark shadow-2xs transition hover:border-blue hover:text-blue sm:self-auto"
                             >
                                 &larr; Clear Filter
                             </Link>
                         </div>
 
                         {searchResults.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                                 {searchResults.map((item) => (
                                     <ProductCard key={item.id} item={item} />
                                 ))}
                             </div>
                         ) : (
-                            <div className="bg-white rounded-xl border border-gray-3 p-12 text-center max-w-lg mx-auto">
-                                <p className="text-sm font-bold text-dark mb-1">No products found</p>
-                                <p className="text-xs text-dark-4 mb-4">
-                                    No products found matching your search. Try another category or keyword.
+                            <div className="mx-auto max-w-lg rounded-xl border border-gray-3 bg-white p-12 text-center">
+                                <p className="mb-1 text-sm font-bold text-dark">
+                                    No products found
+                                </p>
+                                <p className="mb-4 text-xs text-dark-4">
+                                    No products found matching your search. Try
+                                    another category or keyword.
                                 </p>
                                 <Link
                                     href="/"
-                                    className="inline-flex items-center px-4 py-2 rounded-lg bg-blue text-white text-xs font-semibold hover:bg-blue/90 transition"
+                                    className="inline-flex items-center rounded-lg bg-blue px-4 py-2 text-xs font-semibold text-white transition hover:bg-blue/90"
                                 >
                                     Browse All Products
                                 </Link>
@@ -86,19 +95,25 @@ export default function Home({
 
                     {/* Browse By Category */}
                     <section className="overflow-hidden pt-16">
-                        <div className="max-w-292.5 w-full mx-auto px-4 sm:px-8 xl:px-0">
+                        <div className="mx-auto w-full max-w-292.5 px-4 sm:px-8 xl:px-0">
                             <div className="mb-10 flex items-center justify-between">
                                 <div>
-                                    <span className="flex items-center gap-2.5 font-medium text-xs text-blue mb-1.5">
+                                    <span className="mb-1.5 flex items-center gap-2.5 text-xs font-medium text-blue">
                                         Categories
                                     </span>
-                                    <h2 className="font-bold text-2xl text-dark">Browse by Category</h2>
+                                    <h2 className="text-2xl font-bold text-dark">
+                                        Browse by Category
+                                    </h2>
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6">
+                            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-6">
                                 {categories.map((cat, idx) => (
-                                    <CategoryCard key={cat.id} category={cat} index={idx} />
+                                    <CategoryCard
+                                        key={cat.id}
+                                        category={cat}
+                                        index={idx}
+                                    />
                                 ))}
                             </div>
                         </div>
@@ -107,19 +122,26 @@ export default function Home({
             )}
 
             {/* Verified Shops */}
-            <section id="verified-shops" className="overflow-hidden pt-14 pb-14 bg-white">
-                <div className="max-w-292.5 w-full mx-auto px-4 sm:px-8 xl:px-0">
+            <section
+                id="verified-shops"
+                className="overflow-hidden bg-white pt-14 pb-14"
+            >
+                <div className="mx-auto w-full max-w-292.5 px-4 sm:px-8 xl:px-0">
                     <div className="mb-8 flex items-center justify-between">
                         <div>
-                            <span className="text-xs font-bold text-blue uppercase tracking-wider block mb-1">
+                            <span className="mb-1 block text-xs font-bold tracking-wider text-blue uppercase">
                                 Merchant Network
                             </span>
-                            <h2 className="font-bold text-2xl text-dark">Explore Verified Shops</h2>
+                            <h2 className="text-2xl font-bold text-dark">
+                                Explore Verified Shops
+                            </h2>
                         </div>
-                        <span className="text-xs text-dark-4 font-semibold">{shops.length} Registered Shops</span>
+                        <span className="text-xs font-semibold text-dark-4">
+                            {shops.length} Registered Shops
+                        </span>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+                    <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
                         {shops.map((shop, sIdx) => (
                             <ShopCard key={shop.id} shop={shop} index={sIdx} />
                         ))}
@@ -128,19 +150,21 @@ export default function Home({
             </section>
 
             {/* New Arrivals from Verified Shops */}
-            <section className="overflow-hidden py-14 bg-gray-1 border-t border-gray-3">
-                <div className="max-w-292.5 w-full mx-auto px-4 sm:px-8 xl:px-0">
+            <section className="overflow-hidden border-t border-gray-3 bg-gray-1 py-14">
+                <div className="mx-auto w-full max-w-292.5 px-4 sm:px-8 xl:px-0">
                     <div className="mb-8 flex items-center justify-between">
                         <div>
-                            <span className="text-xs font-bold text-blue uppercase tracking-wider block mb-1">
+                            <span className="mb-1 block text-xs font-bold tracking-wider text-blue uppercase">
                                 Fresh Inventory
                             </span>
-                            <h2 className="font-bold text-2xl text-dark">New Arrivals from Shops</h2>
+                            <h2 className="text-2xl font-bold text-dark">
+                                New Arrivals from Shops
+                            </h2>
                         </div>
                     </div>
 
                     {/* Product Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {newArrivals.map((item) => (
                             <ProductCard key={item.id} item={item} />
                         ))}

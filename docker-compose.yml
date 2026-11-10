@@ -1,134 +1,134 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: csn_ecommerce_app
-    restart: unless-stopped
-    working_dir: /var/www
-    env_file: .env
-    environment:
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_DATABASE: "${DB_DATABASE:-csn_ecommerce}"
-      DB_USERNAME: "${DB_USERNAME:-root}"
-      DB_PASSWORD: "${DB_PASSWORD:-secret}"
-      APP_URL: "${APP_URL:-http://localhost}"
-      APP_KEY: "${APP_KEY:-base64:Pvl0ChyexDup2hSVje288OleDelaZceNaJFasFLxrXQ=}"
-      RUN_MIGRATIONS: "${RUN_MIGRATIONS:-true}"
-      RUN_SEEDER: "${RUN_SEEDER:-true}"
-    volumes:
-      - .:/var/www
-      - app_storage:/var/www/storage
-    depends_on:
-      - db
-    networks:
-      - csn_ecommerce_network
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: csn_ecommerce_app
+        restart: unless-stopped
+        working_dir: /var/www
+        env_file: .env
+        environment:
+            DB_HOST: db
+            DB_PORT: 3306
+            DB_DATABASE: '${DB_DATABASE:-csn_ecommerce}'
+            DB_USERNAME: '${DB_USERNAME:-root}'
+            DB_PASSWORD: '${DB_PASSWORD:-secret}'
+            APP_URL: '${APP_URL:-http://localhost}'
+            APP_KEY: '${APP_KEY:-base64:Pvl0ChyexDup2hSVje288OleDelaZceNaJFasFLxrXQ=}'
+            RUN_MIGRATIONS: '${RUN_MIGRATIONS:-true}'
+            RUN_SEEDER: '${RUN_SEEDER:-true}'
+        volumes:
+            - .:/var/www
+            - app_storage:/var/www/storage
+        depends_on:
+            - db
+        networks:
+            - csn_ecommerce_network
 
-  db:
-    image: mysql:8.0
-    container_name: csn_ecommerce_db
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD:-secret}"
-      MYSQL_DATABASE: "${DB_DATABASE:-csn_ecommerce}"
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - csn_ecommerce_network
+    db:
+        image: mysql:8.0
+        container_name: csn_ecommerce_db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-secret}'
+            MYSQL_DATABASE: '${DB_DATABASE:-csn_ecommerce}'
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - csn_ecommerce_network
 
-  nginx:
-    image: nginx:alpine
-    container_name: csn_ecommerce_nginx
-    restart: unless-stopped
-    ports:
-      - "${FORWARD_HTTP_PORT:-80}:80"
-      - "${FORWARD_HTTPS_PORT:-443}:443"
-    volumes:
-      - .:/var/www
-      - ./docker/nginx/production.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./docker/certbot/conf:/etc/letsencrypt:ro
-      - ./docker/certbot/www:/var/www/certbot:ro
-      - app_storage:/var/www/storage
-    depends_on:
-      - app
-    networks:
-      - csn_ecommerce_network
+    nginx:
+        image: nginx:alpine
+        container_name: csn_ecommerce_nginx
+        restart: unless-stopped
+        ports:
+            - '${FORWARD_HTTP_PORT:-80}:80'
+            - '${FORWARD_HTTPS_PORT:-443}:443'
+        volumes:
+            - .:/var/www
+            - ./docker/nginx/production.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./docker/certbot/conf:/etc/letsencrypt:ro
+            - ./docker/certbot/www:/var/www/certbot:ro
+            - app_storage:/var/www/storage
+        depends_on:
+            - app
+        networks:
+            - csn_ecommerce_network
 
-  certbot:
-    image: certbot/certbot
-    container_name: csn_ecommerce_certbot
-    restart: unless-stopped
-    volumes:
-      - ./docker/certbot/conf:/etc/letsencrypt
-      - ./docker/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    networks:
-      - csn_ecommerce_network
+    certbot:
+        image: certbot/certbot
+        container_name: csn_ecommerce_certbot
+        restart: unless-stopped
+        volumes:
+            - ./docker/certbot/conf:/etc/letsencrypt
+            - ./docker/certbot/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+        networks:
+            - csn_ecommerce_network
 
-  # queue-worker:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: csn_ecommerce_queue
-  #   command: ["queue", "queue:work", "--timeout=90", "--sleep=3", "--tries=3"]
-  #   restart: unless-stopped
-  #   env_file: .env
-  #   volumes:
-  #     - .:/var/www
-  #   depends_on:
-  #     - app
-  #     - db
-  #   networks:
-  #     - csn_ecommerce_network
+    # queue-worker:
+    #   build:
+    #     context: .
+    #     dockerfile: Dockerfile
+    #   container_name: csn_ecommerce_queue
+    #   command: ["queue", "queue:work", "--timeout=90", "--sleep=3", "--tries=3"]
+    #   restart: unless-stopped
+    #   env_file: .env
+    #   volumes:
+    #     - .:/var/www
+    #   depends_on:
+    #     - app
+    #     - db
+    #   networks:
+    #     - csn_ecommerce_network
 
-  # scheduler:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: csn_ecommerce_scheduler
-  #   command: ["scheduler", "sh", "-c", "while true; do php /var/www/artisan schedule:run; sleep 60; done"]
-  #   restart: unless-stopped
-  #   env_file: .env
-  #   volumes:
-  #     - .:/var/www
-  #   depends_on:
-  #     - app
-  #     - db
-  #   networks:
-  #     - csn_ecommerce_network
+    # scheduler:
+    #   build:
+    #     context: .
+    #     dockerfile: Dockerfile
+    #   container_name: csn_ecommerce_scheduler
+    #   command: ["scheduler", "sh", "-c", "while true; do php /var/www/artisan schedule:run; sleep 60; done"]
+    #   restart: unless-stopped
+    #   env_file: .env
+    #   volumes:
+    #     - .:/var/www
+    #   depends_on:
+    #     - app
+    #     - db
+    #   networks:
+    #     - csn_ecommerce_network
 
-  # redis:
-  #   image: redis:7-alpine
-  #   container_name: csn_ecommerce_redis
-  #   restart: unless-stopped
-  #   ports:
-  #     - "6379:6379"
-  #   volumes:
-  #     - redis_data:/data
-  #   networks:
-  #     - csn_ecommerce_network
+    # redis:
+    #   image: redis:7-alpine
+    #   container_name: csn_ecommerce_redis
+    #   restart: unless-stopped
+    #   ports:
+    #     - "6379:6379"
+    #   volumes:
+    #     - redis_data:/data
+    #   networks:
+    #     - csn_ecommerce_network
 
-  # reverb:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: csn_ecommerce_reverb
-  #   restart: unless-stopped
-  #   command: ["php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080"]
-  #   env_file: .env
-  #   ports:
-  #     - "8085:8080"
-  #   depends_on:
-  #     - app
-  #   networks:
-  #     - csn_ecommerce_network
+    # reverb:
+    #   build:
+    #     context: .
+    #     dockerfile: Dockerfile
+    #   container_name: csn_ecommerce_reverb
+    #   restart: unless-stopped
+    #   command: ["php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080"]
+    #   env_file: .env
+    #   ports:
+    #     - "8085:8080"
+    #   depends_on:
+    #     - app
+    #   networks:
+    #     - csn_ecommerce_network
 
 networks:
-  csn_ecommerce_network:
-    name: csn_ecommerce_network
+    csn_ecommerce_network:
+        name: csn_ecommerce_network
 
 volumes:
-  db_data:
-  app_storage:
-  # redis_data:
+    db_data:
+    app_storage:
+    # redis_data:

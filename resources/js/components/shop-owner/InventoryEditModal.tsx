@@ -8,10 +8,17 @@ interface InventoryEditModalProps {
     onClose: () => void;
 }
 
-export default function InventoryEditModal({ item, onClose }: InventoryEditModalProps) {
-    const [customImagePreview, setCustomImagePreview] = useState<string | null>(null);
+export default function InventoryEditModal({
+    item,
+    onClose,
+}: InventoryEditModalProps) {
+    const [customImagePreview, setCustomImagePreview] = useState<string | null>(
+        null,
+    );
     const [existingGallery, setExistingGallery] = useState<string[]>([]);
-    const [newGalleryPreviews, setNewGalleryPreviews] = useState<{ file: File; url: string }[]>([]);
+    const [newGalleryPreviews, setNewGalleryPreviews] = useState<
+        { file: File; url: string }[]
+    >([]);
 
     const { data, setData, processing, errors, reset } = useForm<{
         _method: string;
@@ -47,10 +54,18 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
 
         setData({
             _method: 'PUT',
-            custom_price: item.custom_price !== null && item.custom_price !== undefined ? String(item.custom_price) : '',
-            custom_compare_price: item.custom_compare_price !== null && item.custom_compare_price !== undefined ? String(item.custom_compare_price) : '',
+            custom_price:
+                item.custom_price !== null && item.custom_price !== undefined
+                    ? String(item.custom_price)
+                    : '',
+            custom_compare_price:
+                item.custom_compare_price !== null &&
+                item.custom_compare_price !== undefined
+                    ? String(item.custom_compare_price)
+                    : '',
             custom_title: item.custom_title || '',
-            custom_description: item.custom_description || item.product?.description || '',
+            custom_description:
+                item.custom_description || item.product?.description || '',
             stock_quantity: item.stock_quantity,
             is_active: item.is_active,
             custom_image: null,
@@ -66,17 +81,22 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
         return `৳${Number(amount).toLocaleString('en-US')}`;
     };
 
-    const handleCustomImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCustomImageChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
         const file = e.target.files?.[0];
         if (file) {
             setData('custom_image', file);
             const reader = new FileReader();
-            reader.onload = (re) => setCustomImagePreview(re.target?.result as string);
+            reader.onload = (re) =>
+                setCustomImagePreview(re.target?.result as string);
             reader.readAsDataURL(file);
         }
     };
 
-    const handleCustomGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCustomGalleryChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
         const files = Array.from(e.target.files || []);
         if (files.length > 0) {
             const newPreviews = files.map((file) => ({
@@ -118,43 +138,52 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-gray-100 max-h-[90vh] overflow-y-auto">
-                <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
+            <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-gray-100 bg-white p-6 shadow-xl">
+                <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-4">
                     <div>
-                        <h3 className="text-base font-bold text-gray-900">Edit Product</h3>
+                        <h3 className="text-base font-bold text-gray-900">
+                            Edit Product
+                        </h3>
                     </div>
                     <button
                         type="button"
                         onClick={handleClose}
-                        className="text-gray-400 hover:text-gray-600 p-1 rounded-lg"
+                        className="rounded-lg p-1 text-gray-400 hover:text-gray-600"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
 
                 <form onSubmit={handleUpdate} className="space-y-4 text-xs">
                     {/* Product Reference */}
-                    <div className="p-3 bg-gray-50 rounded-xl flex items-center gap-3">
+                    <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3">
                         <img
-                            src={item.product?.thumbnail_url || '/images/placeholder-product.svg'}
+                            src={
+                                item.product?.thumbnail_url ||
+                                '/images/placeholder-product.svg'
+                            }
                             alt="Product"
-                            className="w-12 h-12 object-contain"
+                            className="h-12 w-12 object-contain"
                             onError={(e) => {
-                                (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.svg';
+                                (e.currentTarget as HTMLImageElement).src =
+                                    '/images/placeholder-product.svg';
                             }}
                         />
                         <div>
-                            <span className="font-bold text-gray-800 block">{item.product?.title}</span>
+                            <span className="block font-bold text-gray-800">
+                                {item.product?.title}
+                            </span>
                             <span className="text-[11px] text-gray-500">
-                                Base Price: {formatBDT(item.product?.base_price)}
+                                Base Price:{' '}
+                                {formatBDT(item.product?.base_price)}
                             </span>
                         </div>
                     </div>
 
                     {/* Custom Price */}
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">
+                        <label className="mb-1 block font-semibold text-gray-700">
                             Selling Price (৳)
                         </label>
                         <input
@@ -162,15 +191,21 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
                             step="0.01"
                             placeholder={String(item.product?.base_price || '')}
                             value={data.custom_price}
-                            onChange={(e) => setData('custom_price', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 focus:border-blue-600 outline-none"
+                            onChange={(e) =>
+                                setData('custom_price', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
                         />
-                        {errors.custom_price && <span className="text-rose-600 text-[11px]">{errors.custom_price}</span>}
+                        {errors.custom_price && (
+                            <span className="text-[11px] text-rose-600">
+                                {errors.custom_price}
+                            </span>
+                        )}
                     </div>
 
                     {/* Custom Compare Price */}
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">
+                        <label className="mb-1 block font-semibold text-gray-700">
                             Compare Price / MRP (৳) (Optional)
                         </label>
                         <input
@@ -178,75 +213,102 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
                             step="0.01"
                             placeholder="e.g. 135000"
                             value={data.custom_compare_price}
-                            onChange={(e) => setData('custom_compare_price', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 focus:border-blue-600 outline-none"
+                            onChange={(e) =>
+                                setData('custom_compare_price', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
                         />
                     </div>
 
                     {/* Stock Quantity */}
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">Stock Quantity *</label>
+                        <label className="mb-1 block font-semibold text-gray-700">
+                            Stock Quantity *
+                        </label>
                         <input
                             type="number"
                             required
                             min="0"
                             value={data.stock_quantity}
-                            onChange={(e) => setData('stock_quantity', Number(e.target.value))}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 focus:border-blue-600 outline-none"
+                            onChange={(e) =>
+                                setData(
+                                    'stock_quantity',
+                                    Number(e.target.value),
+                                )
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
                         />
-                        {errors.stock_quantity && <span className="text-rose-600 text-[11px]">{errors.stock_quantity}</span>}
+                        {errors.stock_quantity && (
+                            <span className="text-[11px] text-rose-600">
+                                {errors.stock_quantity}
+                            </span>
+                        )}
                     </div>
 
                     {/* Custom Title */}
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">
+                        <label className="mb-1 block font-semibold text-gray-700">
                             Custom Title (Optional)
                         </label>
                         <input
                             type="text"
                             placeholder={item.product?.title}
                             value={data.custom_title}
-                            onChange={(e) => setData('custom_title', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 focus:border-blue-600 outline-none"
+                            onChange={(e) =>
+                                setData('custom_title', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
                         />
                     </div>
 
                     {/* Custom Description */}
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">
+                        <label className="mb-1 block font-semibold text-gray-700">
                             Custom Description (Optional)
                         </label>
                         <textarea
                             rows={3}
                             placeholder="Add custom warranty, bundle offers, or specific shop terms..."
                             value={data.custom_description}
-                            onChange={(e) => setData('custom_description', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 focus:border-blue-600 outline-none"
+                            onChange={(e) =>
+                                setData('custom_description', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
                         />
                     </div>
 
                     {/* Custom Main Thumbnail */}
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">
+                        <label className="mb-1 block font-semibold text-gray-700">
                             Main Thumbnail
                         </label>
                         <div className="flex items-center gap-3">
-                            <div className="w-16 h-16 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center overflow-hidden shrink-0 p-1">
+                            <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-gray-50 p-1">
                                 {customImagePreview ? (
-                                    <img src={customImagePreview} alt="Preview" className="w-full h-full object-contain" />
+                                    <img
+                                        src={customImagePreview}
+                                        alt="Preview"
+                                        className="h-full w-full object-contain"
+                                    />
                                 ) : (
                                     <img
-                                        src={item.display_thumbnail_url || '/images/placeholder-product.svg'}
+                                        src={
+                                            item.display_thumbnail_url ||
+                                            '/images/placeholder-product.svg'
+                                        }
                                         alt="Default"
-                                        className="w-full h-full object-contain"
+                                        className="h-full w-full object-contain"
                                         onError={(e) => {
-                                            (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.svg';
+                                            (
+                                                e.currentTarget as HTMLImageElement
+                                            ).src =
+                                                '/images/placeholder-product.svg';
                                         }}
                                     />
                                 )}
                             </div>
-                            <label className="px-3 py-1.5 border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 hover:bg-gray-50 cursor-pointer flex items-center gap-1.5">
-                                <Upload className="w-3.5 h-3.5" />
+                            <label className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50">
+                                <Upload className="h-3.5 w-3.5" />
                                 <span>Change Thumbnail</span>
                                 <input
                                     type="file"
@@ -260,12 +322,12 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
 
                     {/* Gallery Photos */}
                     <div>
-                        <div className="flex items-center justify-between mb-1">
+                        <div className="mb-1 flex items-center justify-between">
                             <label className="block font-semibold text-gray-700">
                                 Gallery Photos
                             </label>
-                            <label className="text-xs font-semibold text-blue-600 hover:underline cursor-pointer flex items-center gap-1">
-                                <Plus className="w-3.5 h-3.5" />
+                            <label className="flex cursor-pointer items-center gap-1 text-xs font-semibold text-blue-600 hover:underline">
+                                <Plus className="h-3.5 w-3.5" />
                                 <span>Add Photos</span>
                                 <input
                                     type="file"
@@ -277,29 +339,41 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
                             </label>
                         </div>
 
-                        <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 p-2 bg-gray-50 rounded-xl border border-gray-200">
+                        <div className="grid grid-cols-4 gap-2 rounded-xl border border-gray-200 bg-gray-50 p-2 sm:grid-cols-5">
                             {/* Existing Gallery Photos */}
                             {existingGallery.map((imgPath, idx) => {
-                                const resolvedUrl = imgPath.startsWith('http') || imgPath.startsWith('/')
-                                    ? imgPath
-                                    : `/storage/${imgPath}`;
+                                const resolvedUrl =
+                                    imgPath.startsWith('http') ||
+                                    imgPath.startsWith('/')
+                                        ? imgPath
+                                        : `/storage/${imgPath}`;
                                 return (
-                                    <div key={`existing-${idx}`} className="relative aspect-square bg-white border border-gray-200 rounded-lg p-1 flex items-center justify-center overflow-hidden">
+                                    <div
+                                        key={`existing-${idx}`}
+                                        className="relative flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-gray-200 bg-white p-1"
+                                    >
                                         <img
                                             src={resolvedUrl}
                                             alt={`Gallery ${idx}`}
                                             className="max-h-full max-w-full object-contain"
                                             onError={(e) => {
-                                                (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.svg';
+                                                (
+                                                    e.currentTarget as HTMLImageElement
+                                                ).src =
+                                                    '/images/placeholder-product.svg';
                                             }}
                                         />
                                         <button
                                             type="button"
-                                            onClick={() => removeExistingGalleryImage(imgPath)}
-                                            className="absolute top-1 right-1 bg-black/60 text-white rounded-full p-0.5 hover:bg-rose-600 transition"
+                                            onClick={() =>
+                                                removeExistingGalleryImage(
+                                                    imgPath,
+                                                )
+                                            }
+                                            className="absolute top-1 right-1 rounded-full bg-black/60 p-0.5 text-white transition hover:bg-rose-600"
                                             title="Remove photo"
                                         >
-                                            <X className="w-3 h-3" />
+                                            <X className="h-3 w-3" />
                                         </button>
                                     </div>
                                 );
@@ -307,15 +381,24 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
 
                             {/* Newly selected gallery photos */}
                             {newGalleryPreviews.map((preview, idx) => (
-                                <div key={`new-${idx}`} className="relative aspect-square bg-blue-50 border border-blue-300 rounded-lg p-1 flex items-center justify-center overflow-hidden">
-                                    <img src={preview.url} alt={`New ${idx}`} className="max-h-full max-w-full object-contain" />
+                                <div
+                                    key={`new-${idx}`}
+                                    className="relative flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-blue-300 bg-blue-50 p-1"
+                                >
+                                    <img
+                                        src={preview.url}
+                                        alt={`New ${idx}`}
+                                        className="max-h-full max-w-full object-contain"
+                                    />
                                     <button
                                         type="button"
-                                        onClick={() => removeNewGalleryImage(idx)}
-                                        className="absolute top-1 right-1 bg-black/60 text-white rounded-full p-0.5 hover:bg-rose-600 transition"
+                                        onClick={() =>
+                                            removeNewGalleryImage(idx)
+                                        }
+                                        className="absolute top-1 right-1 rounded-full bg-black/60 p-0.5 text-white transition hover:bg-rose-600"
                                         title="Remove photo"
                                     >
-                                        <X className="w-3 h-3" />
+                                        <X className="h-3 w-3" />
                                     </button>
                                 </div>
                             ))}
@@ -328,30 +411,37 @@ export default function InventoryEditModal({ item, onClose }: InventoryEditModal
                             type="checkbox"
                             id="is_active_toggle"
                             checked={data.is_active}
-                            onChange={(e) => setData('is_active', e.target.checked)}
-                            className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                            onChange={(e) =>
+                                setData('is_active', e.target.checked)
+                            }
+                            className="h-4 w-4 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                         />
-                        <label htmlFor="is_active_toggle" className="font-semibold text-gray-800 cursor-pointer">
+                        <label
+                            htmlFor="is_active_toggle"
+                            className="cursor-pointer font-semibold text-gray-800"
+                        >
                             Active (visible in storefront)
                         </label>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="pt-4 border-t border-gray-100 flex items-center justify-end gap-3">
+                    <div className="flex items-center justify-end gap-3 border-t border-gray-100 pt-4">
                         <button
                             type="button"
                             onClick={handleClose}
-                            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition cursor-pointer"
+                            className="cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition hover:bg-gray-50"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={processing}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-semibold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
+                            className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-blue-600 px-5 py-2 font-semibold text-white shadow-sm transition hover:bg-blue-700"
                         >
-                            <Save className="w-4 h-4" />
-                            <span>{processing ? 'Saving...' : 'Save Changes'}</span>
+                            <Save className="h-4 w-4" />
+                            <span>
+                                {processing ? 'Saving...' : 'Save Changes'}
+                            </span>
                         </button>
                     </div>
                 </form>

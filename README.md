@@ -79,13 +79,13 @@ Access the local storefront at `http://localhost:8000`.
 
 All seeded accounts use the password: `password`
 
-| Role | Email | Password | Default Portal | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| **Super Admin** | `admin@csn.com` | `password` | `/admin` | Master catalog, categories, and shops management |
-| **Shop Owner 1** | `owner1@csn.com` | `password` | `/owner/inventory` | Dhanmondi Gadget Hub (6 stocked items) |
-| **Shop Owner 2** | `owner2@csn.com` | `password` | `/owner/inventory` | Jamuna Lifestyle & Mart (4 stocked items) |
-| **Shop Owner 3** | `owner3@csn.com` | `password` | `/owner/inventory` | Chittagong Digital Zone (0 stocked items - empty state) |
-| **Customer** | `customer@csn.com` | `password` | `/` | Standard customer account |
+| Role             | Email              | Password   | Default Portal     | Description                                             |
+| :--------------- | :----------------- | :--------- | :----------------- | :------------------------------------------------------ |
+| **Super Admin**  | `admin@csn.com`    | `password` | `/admin`           | Master catalog, categories, and shops management        |
+| **Shop Owner 1** | `owner1@csn.com`   | `password` | `/owner/inventory` | Dhanmondi Gadget Hub (6 stocked items)                  |
+| **Shop Owner 2** | `owner2@csn.com`   | `password` | `/owner/inventory` | Jamuna Lifestyle & Mart (4 stocked items)               |
+| **Shop Owner 3** | `owner3@csn.com`   | `password` | `/owner/inventory` | Chittagong Digital Zone (0 stocked items - empty state) |
+| **Customer**     | `customer@csn.com` | `password` | `/`                | Standard customer account                               |
 
 ---
 
@@ -94,12 +94,14 @@ All seeded accounts use the password: `password`
 Two open-source packages I built (`thekaziomar/*`) are integrated into this project:
 
 ### 1. [`thekaziomar/laravel-smart-upload`](https://kaziomarsh24.github.io/laravel-smart-upload/)
+
 - Automatically converts uploads to WebP format.
 - Generates responsive thumbnail variants on upload.
 - **Auto Storage Purge:** Models (`Shop`, `Product`, `Category`, `ShopProduct`) use the `HasUploadPurge` trait and declare `$purgeableFiles = ['logo', 'banner', 'thumbnail', 'gallery', 'image']` so old or replaced files are automatically deleted from storage whenever records are updated or deleted, preventing orphaned storage bloat.
 - Documentation: [laravel-smart-upload documentation](https://kaziomarsh24.github.io/laravel-smart-upload/)
 
 ### 2. [`thekaziomar/laravel-atomic-cache`](https://kaziomarsh24.github.io/laravel-atomic-cache/)
+
 - Enables tag-based caching on standard database cache drivers (MySQL / SQLite).
 - **Atomic Locks:** Uses atomic locks to eliminate cache stampedes and dog-piling during concurrent traffic spikes.
 - **Auto Cache Busting:** Models use the `AutoClearsCache` trait to invalidate their virtual tag versions on `saved` and `deleted` events.
@@ -123,30 +125,37 @@ Two open-source packages I built (`thekaziomar/*`) are integrated into this proj
 The project is pre-configured for direct VPS deployment with automated Docker orchestration, Nginx reverse proxy, and Let's Encrypt SSL.
 
 ### Architecture Overview
+
 - **Production (`docker-compose.yml`):** Base compose file mounts `docker/nginx/production.conf`, listening on port 80 (HTTP redirect + ACME challenge) and port 443 (HTTP/2 SSL). Pre-provisioned fallback certificates in `docker/certbot/conf/live/` guarantee Nginx boots immediately on brand-new servers without missing-certificate crashes.
 - **Local Development (`docker-compose.override.yml`):** Automatically applied locally to mount `docker/nginx/default.conf` and map port `8080:80` without HTTPS overhead.
 
 ### 1. Configure Domain & Environment
+
 On your production server:
+
 - `.env`:
-  ```env
-  APP_ENV=production
-  APP_DEBUG=false
-  APP_URL=https://yourdomain.com
-  FORWARD_HTTP_PORT=80
-  FORWARD_HTTPS_PORT=443
-  ```
+    ```env
+    APP_ENV=production
+    APP_DEBUG=false
+    APP_URL=https://yourdomain.com
+    FORWARD_HTTP_PORT=80
+    FORWARD_HTTPS_PORT=443
+    ```
 - `docker/nginx/production.conf`:
   Replace `server_name _;` with your domain (e.g. `server_name yourdomain.com www.yourdomain.com;`).
 
 ### 2. Start Services
+
 ```bash
 docker compose up -d --build
 ```
-*(The container entrypoint automatically waits for MySQL, executes database migrations, seeds initial data, links storage, and caches configurations).*
+
+_(The container entrypoint automatically waits for MySQL, executes database migrations, seeds initial data, links storage, and caches configurations)._
 
 ### 3. Issue Trusted SSL Certificate (One-Time Command)
+
 Once your domain DNS points to your server IP, obtain your Let's Encrypt SSL certificate:
+
 ```bash
 # 1. Request SSL certificate via Certbot ACME challenge
 docker compose run --rm --entrypoint certbot certbot certonly \
@@ -166,7 +175,7 @@ sed -i 's|/etc/letsencrypt/live/privkey.pem|/etc/letsencrypt/live/yourdomain.com
 docker compose restart nginx
 ```
 
-*(The included `certbot` container automatically handles certificate renewals every 12 hours).*
+_(The included `certbot` container automatically handles certificate renewals every 12 hours)._
 
 ---
 

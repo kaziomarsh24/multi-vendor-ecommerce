@@ -8,7 +8,10 @@ interface AdminGalleryModalProps {
     onClose: () => void;
 }
 
-export default function AdminGalleryModal({ product, onClose }: AdminGalleryModalProps) {
+export default function AdminGalleryModal({
+    product,
+    onClose,
+}: AdminGalleryModalProps) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
@@ -17,47 +20,56 @@ export default function AdminGalleryModal({ product, onClose }: AdminGalleryModa
 
     if (!product) return null;
 
-    const photos = [product.thumbnail_url, ...(product.gallery_urls || [])].filter(Boolean) as string[];
-    const thumbs = [product.thumb_url, ...(product.gallery_thumb_urls || [])].filter(Boolean) as string[];
-    const activePhoto = photos[activeIndex] || photos[0] || '/images/placeholder-product.svg';
+    const photos = [
+        product.thumbnail_url,
+        ...(product.gallery_urls || []),
+    ].filter(Boolean) as string[];
+    const thumbs = [
+        product.thumb_url,
+        ...(product.gallery_thumb_urls || []),
+    ].filter(Boolean) as string[];
+    const activePhoto =
+        photos[activeIndex] || photos[0] || '/images/placeholder-product.svg';
 
     return (
         <div
-            className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-xs"
             onClick={onClose}
         >
             <div
-                className="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-gray-100 space-y-4"
+                className="w-full max-w-2xl space-y-4 rounded-2xl border border-gray-100 bg-white p-6 shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Modal Header */}
-                <div className="flex items-start justify-between pb-3 border-b border-gray-100">
+                <div className="flex items-start justify-between border-b border-gray-100 pb-3">
                     <div>
-                        <span className="text-[10px] text-blue-600 font-bold uppercase tracking-wider block">
-                            {product.category?.name || 'Product'} &bull; SKU: {product.sku}
+                        <span className="block text-[10px] font-bold tracking-wider text-blue-600 uppercase">
+                            {product.category?.name || 'Product'} &bull; SKU:{' '}
+                            {product.sku}
                         </span>
-                        <h3 className="text-base font-bold text-gray-900 leading-tight">
+                        <h3 className="text-base leading-tight font-bold text-gray-900">
                             {product.title}
                         </h3>
                     </div>
                     <button
                         type="button"
                         onClick={onClose}
-                        className="p-1 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition cursor-pointer"
+                        className="cursor-pointer rounded-lg p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
 
                 {/* Gallery Active Photo View */}
                 <div className="space-y-4">
-                    <div className="relative rounded-xl bg-[#F6F7FB] border border-gray-200 h-72 flex items-center justify-center p-4 overflow-hidden group">
+                    <div className="group relative flex h-72 items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-[#F6F7FB] p-4">
                         <img
                             src={activePhoto}
                             alt={product.title}
                             className="max-h-full max-w-full object-contain"
                             onError={(e) => {
-                                (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.svg';
+                                (e.currentTarget as HTMLImageElement).src =
+                                    '/images/placeholder-product.svg';
                             }}
                         />
 
@@ -65,22 +77,33 @@ export default function AdminGalleryModal({ product, onClose }: AdminGalleryModa
                             <>
                                 <button
                                     type="button"
-                                    onClick={() => setActiveIndex((prev) => (prev - 1 + photos.length) % photos.length)}
-                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 hover:bg-white shadow-md text-gray-700 hover:text-blue-600 transition cursor-pointer"
+                                    onClick={() =>
+                                        setActiveIndex(
+                                            (prev) =>
+                                                (prev - 1 + photos.length) %
+                                                photos.length,
+                                        )
+                                    }
+                                    className="absolute top-1/2 left-2 -translate-y-1/2 cursor-pointer rounded-full bg-white/90 p-2 text-gray-700 shadow-md transition hover:bg-white hover:text-blue-600"
                                 >
-                                    <ChevronLeft className="w-5 h-5" />
+                                    <ChevronLeft className="h-5 w-5" />
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => setActiveIndex((prev) => (prev + 1) % photos.length)}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 hover:bg-white shadow-md text-gray-700 hover:text-blue-600 transition cursor-pointer"
+                                    onClick={() =>
+                                        setActiveIndex(
+                                            (prev) =>
+                                                (prev + 1) % photos.length,
+                                        )
+                                    }
+                                    className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full bg-white/90 p-2 text-gray-700 shadow-md transition hover:bg-white hover:text-blue-600"
                                 >
-                                    <ChevronRight className="w-5 h-5" />
+                                    <ChevronRight className="h-5 w-5" />
                                 </button>
                             </>
                         )}
 
-                        <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-mono">
+                        <span className="absolute right-2 bottom-2 rounded bg-black/60 px-2 py-0.5 font-mono text-[10px] text-white">
                             {activeIndex + 1} / {photos.length}
                         </span>
                     </div>
@@ -92,8 +115,10 @@ export default function AdminGalleryModal({ product, onClose }: AdminGalleryModa
                                 key={idx}
                                 type="button"
                                 onClick={() => setActiveIndex(idx)}
-                                className={`w-14 h-14 rounded-lg bg-[#F6F7FB] p-1 flex items-center justify-center border-2 transition cursor-pointer shrink-0 ${
-                                    activeIndex === idx ? 'border-blue-600 ring-2 ring-blue-100' : 'border-gray-200 hover:border-gray-400'
+                                className={`flex h-14 w-14 shrink-0 cursor-pointer items-center justify-center rounded-lg border-2 bg-[#F6F7FB] p-1 transition ${
+                                    activeIndex === idx
+                                        ? 'border-blue-600 ring-2 ring-blue-100'
+                                        : 'border-gray-200 hover:border-gray-400'
                                 }`}
                             >
                                 <img
@@ -101,7 +126,9 @@ export default function AdminGalleryModal({ product, onClose }: AdminGalleryModa
                                     alt=""
                                     className="max-h-full max-w-full object-contain"
                                     onError={(e) => {
-                                        (e.currentTarget as HTMLImageElement).src = photos[idx];
+                                        (
+                                            e.currentTarget as HTMLImageElement
+                                        ).src = photos[idx];
                                     }}
                                 />
                             </button>
@@ -109,8 +136,8 @@ export default function AdminGalleryModal({ product, onClose }: AdminGalleryModa
                     </div>
 
                     {/* Actions & Links */}
-                    <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-                        <div className="font-mono text-[11px] text-gray-400 truncate max-w-xs">
+                    <div className="flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+                        <div className="max-w-xs truncate font-mono text-[11px] text-gray-400">
                             {activePhoto}
                         </div>
                         <div className="flex items-center gap-2">
@@ -118,16 +145,16 @@ export default function AdminGalleryModal({ product, onClose }: AdminGalleryModa
                                 href={`/products/${product.slug}`}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 font-medium transition flex items-center gap-1 cursor-pointer"
+                                className="flex cursor-pointer items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 font-medium text-gray-700 transition hover:bg-gray-50"
                             >
-                                <Eye className="w-3.5 h-3.5" />
+                                <Eye className="h-3.5 w-3.5" />
                                 <span>Storefront View</span>
                             </a>
                             <Link
                                 href={`/admin/catalog/${product.id}/edit`}
-                                className="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition flex items-center gap-1"
+                                className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 font-medium text-white transition hover:bg-blue-700"
                             >
-                                <Edit3 className="w-3.5 h-3.5" />
+                                <Edit3 className="h-3.5 w-3.5" />
                                 <span>Edit Images</span>
                             </Link>
                         </div>

@@ -16,11 +16,11 @@ export default function ShopCard({ shop, index = 0 }: ShopCardProps) {
         .toUpperCase();
 
     return (
-        <div className="rounded-2xl bg-white border border-gray-3 p-3.5 shadow-2xs hover:shadow-md transition duration-200 flex flex-col justify-between group">
+        <div className="group flex flex-col justify-between rounded-2xl border border-gray-3 bg-white p-3.5 shadow-2xs transition duration-200 hover:shadow-md">
             <div>
                 {/* Cover Banner */}
                 <div
-                    className="h-44 w-full rounded-xl overflow-hidden relative bg-cover bg-center border border-gray-2"
+                    className="relative h-44 w-full overflow-hidden rounded-xl border border-gray-2 bg-cover bg-center"
                     style={{
                         backgroundImage: shop.banner_url
                             ? `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.25)), url(${shop.banner_url})`
@@ -30,30 +30,32 @@ export default function ShopCard({ shop, index = 0 }: ShopCardProps) {
                     }}
                 >
                     {/* Status Badge */}
-                    <div className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-xs text-[10px] font-bold text-emerald-600 px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
-                        <ShieldCheck className="w-3.5 h-3.5" />
+                    <div className="absolute top-2.5 right-2.5 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold text-emerald-600 shadow-xs backdrop-blur-xs">
+                        <ShieldCheck className="h-3.5 w-3.5" />
                         Verified
                     </div>
 
                     {/* Shop Logo inside cover bottom-left */}
-                    <div className="absolute left-3 bottom-3 w-13 h-13 rounded-xl bg-white p-1 shadow-md border-2 border-white flex items-center justify-center overflow-hidden shrink-0">
+                    <div className="absolute bottom-3 left-3 flex h-13 w-13 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-white bg-white p-1 shadow-md">
                         {shop.logo_url ? (
                             <img
                                 src={shop.logo_url}
                                 alt={shop.name}
-                                className="max-h-full max-w-full object-contain rounded-lg"
+                                className="max-h-full max-w-full rounded-lg object-contain"
                                 onError={(e) => {
-                                    (e.currentTarget as HTMLElement).style.display = 'none';
+                                    (
+                                        e.currentTarget as HTMLElement
+                                    ).style.display = 'none';
                                 }}
                             />
                         ) : (
                             <div
-                                className={`w-full h-full rounded-lg font-bold text-sm flex items-center justify-center ${
+                                className={`flex h-full w-full items-center justify-center rounded-lg text-sm font-bold ${
                                     index === 0
                                         ? 'bg-blue text-white'
                                         : index === 1
-                                        ? 'bg-teal-600 text-white'
-                                        : 'bg-dark text-white'
+                                          ? 'bg-teal-600 text-white'
+                                          : 'bg-dark text-white'
                                 }`}
                             >
                                 {badgeLetter}
@@ -63,16 +65,18 @@ export default function ShopCard({ shop, index = 0 }: ShopCardProps) {
                 </div>
 
                 {/* Shop Info */}
-                <div className="pt-3 px-1">
-                    <h3 className="font-bold text-base text-dark hover:text-blue transition truncate">
+                <div className="px-1 pt-3">
+                    <h3 className="truncate text-base font-bold text-dark transition hover:text-blue">
                         <Link href={`/shops/${shop.slug}`}>{shop.name}</Link>
                     </h3>
-                    <p className="text-xs text-dark-4 flex items-center gap-1 mt-0.5 truncate">
-                        <MapPin className="w-3.5 h-3.5 text-blue shrink-0" />
-                        <span className="truncate">{shop.address || 'Dhaka, Bangladesh'}</span>
+                    <p className="mt-0.5 flex items-center gap-1 truncate text-xs text-dark-4">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-blue" />
+                        <span className="truncate">
+                            {shop.address || 'Dhaka, Bangladesh'}
+                        </span>
                     </p>
                     {shop.description && (
-                        <p className="text-xs text-dark-3 leading-relaxed mt-2.5 line-clamp-2">
+                        <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-dark-3">
                             {shop.description}
                         </p>
                     )}
@@ -80,19 +84,21 @@ export default function ShopCard({ shop, index = 0 }: ShopCardProps) {
             </div>
 
             {/* Inventory Count & Visit Link */}
-            <div className="mt-4 pt-3 px-1 border-t border-gray-100 flex items-center justify-between">
+            <div className="mt-4 flex items-center justify-between border-t border-gray-100 px-1 pt-3">
                 <div>
-                    <span className="text-[10px] text-dark-4 block uppercase font-medium">Inventory</span>
-                    <span className="font-bold text-dark text-xs">
+                    <span className="block text-[10px] font-medium text-dark-4 uppercase">
+                        Inventory
+                    </span>
+                    <span className="text-xs font-bold text-dark">
                         {shop.shop_products_count ?? 0} Products Stocked
                     </span>
                 </div>
                 <Link
                     href={`/shops/${shop.slug}`}
-                    className="px-4 py-2 bg-dark hover:bg-blue text-white rounded-xl text-xs font-semibold transition shadow-xs flex items-center gap-1.5"
+                    className="flex items-center gap-1.5 rounded-xl bg-dark px-4 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-blue"
                 >
                     <span>Visit Store</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <ArrowRight className="h-3 w-3" />
                 </Link>
             </div>
         </div>

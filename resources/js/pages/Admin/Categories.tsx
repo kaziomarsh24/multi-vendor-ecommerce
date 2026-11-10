@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AdminLayout from '@/layouts/AdminLayout';
-import CategoryModal, { type CategoryWithStats } from '@/components/admin/CategoryModal';
-import {
-    Tag,
-    Plus,
-    FolderTree,
-} from 'lucide-react';
+import CategoryModal, {
+    type CategoryWithStats,
+} from '@/components/admin/CategoryModal';
+import { Tag, Plus, FolderTree } from 'lucide-react';
 
 interface CategoriesProps {
     parentCategories: CategoryWithStats[];
     subcategories: CategoryWithStats[];
 }
 
-export default function AdminCategories({ parentCategories, subcategories }: CategoriesProps) {
-    const [activeTab, setActiveTab] = useState<'parents' | 'subcategories'>('parents');
+export default function AdminCategories({
+    parentCategories,
+    subcategories,
+}: CategoriesProps) {
+    const [activeTab, setActiveTab] = useState<'parents' | 'subcategories'>(
+        'parents',
+    );
 
     // Modal state
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
-    const [modalTargetType, setModalTargetType] = useState<'primary' | 'sub'>('primary');
-    const [editingCategory, setEditingCategory] = useState<CategoryWithStats | null>(null);
+    const [modalTargetType, setModalTargetType] = useState<'primary' | 'sub'>(
+        'primary',
+    );
+    const [editingCategory, setEditingCategory] =
+        useState<CategoryWithStats | null>(null);
 
     const openCreateModal = (type: 'primary' | 'sub') => {
         setModalMode('create');
@@ -50,9 +56,11 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
 
             <div className="space-y-6">
                 {/* Header & Add Action */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold tracking-tight text-dark">Categories</h1>
+                        <h1 className="text-2xl font-bold tracking-tight text-dark">
+                            Categories
+                        </h1>
                     </div>
 
                     <div className="flex items-center gap-2.5">
@@ -60,18 +68,18 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
                             <button
                                 type="button"
                                 onClick={() => openCreateModal('primary')}
-                                className="px-4 py-2 rounded-lg bg-blue hover:bg-blue-dark text-white font-semibold text-xs transition flex items-center gap-1.5 shadow-2xs cursor-pointer"
+                                className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-blue px-4 py-2 text-xs font-semibold text-white shadow-2xs transition hover:bg-blue-dark"
                             >
-                                <Plus className="w-4 h-4" />
+                                <Plus className="h-4 w-4" />
                                 <span>Add Category</span>
                             </button>
                         ) : (
                             <button
                                 type="button"
                                 onClick={() => openCreateModal('sub')}
-                                className="px-4 py-2 rounded-lg bg-blue hover:bg-blue-dark text-white font-semibold text-xs transition flex items-center gap-1.5 shadow-2xs cursor-pointer"
+                                className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-blue px-4 py-2 text-xs font-semibold text-white shadow-2xs transition hover:bg-blue-dark"
                             >
-                                <Plus className="w-4 h-4" />
+                                <Plus className="h-4 w-4" />
                                 <span>Add Subcategory</span>
                             </button>
                         )}
@@ -83,17 +91,19 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
                     <button
                         type="button"
                         onClick={() => setActiveTab('parents')}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                        className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition ${
                             activeTab === 'parents'
                                 ? 'bg-blue text-white shadow-2xs'
-                                : 'bg-gray-1 text-dark-4 hover:text-dark hover:bg-gray-2'
+                                : 'bg-gray-1 text-dark-4 hover:bg-gray-2 hover:text-dark'
                         }`}
                     >
-                        <Tag className="w-3.5 h-3.5" />
+                        <Tag className="h-3.5 w-3.5" />
                         <span>Categories</span>
                         <span
-                            className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-                                activeTab === 'parents' ? 'bg-white/20 text-white' : 'bg-gray-3 text-dark-3'
+                            className={`rounded-full px-1.5 py-0.5 text-[10px] ${
+                                activeTab === 'parents'
+                                    ? 'bg-white/20 text-white'
+                                    : 'bg-gray-3 text-dark-3'
                             }`}
                         >
                             {parentCategories.length}
@@ -103,17 +113,19 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
                     <button
                         type="button"
                         onClick={() => setActiveTab('subcategories')}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                        className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition ${
                             activeTab === 'subcategories'
                                 ? 'bg-blue text-white shadow-2xs'
-                                : 'bg-gray-1 text-dark-4 hover:text-dark hover:bg-gray-2'
+                                : 'bg-gray-1 text-dark-4 hover:bg-gray-2 hover:text-dark'
                         }`}
                     >
-                        <FolderTree className="w-3.5 h-3.5" />
+                        <FolderTree className="h-3.5 w-3.5" />
                         <span>Subcategories</span>
                         <span
-                            className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-                                activeTab === 'subcategories' ? 'bg-white/20 text-white' : 'bg-gray-3 text-dark-3'
+                            className={`rounded-full px-1.5 py-0.5 text-[10px] ${
+                                activeTab === 'subcategories'
+                                    ? 'bg-white/20 text-white'
+                                    : 'bg-gray-3 text-dark-3'
                             }`}
                         >
                             {subcategories.length}
@@ -123,42 +135,62 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
 
                 {/* Tab 1: Primary Categories Table */}
                 {activeTab === 'parents' && (
-                    <div className="rounded-xl border border-gray-2 bg-white shadow-1 overflow-hidden">
+                    <div className="shadow-1 overflow-hidden rounded-xl border border-gray-2 bg-white">
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
+                            <table className="w-full border-collapse text-left">
                                 <thead>
-                                    <tr className="border-b border-gray-2 bg-gray-1 text-[11px] font-bold text-dark-4 uppercase tracking-wider">
-                                        <th className="px-6 py-4">Department / Category</th>
+                                    <tr className="border-b border-gray-2 bg-gray-1 text-[11px] font-bold tracking-wider text-dark-4 uppercase">
+                                        <th className="px-6 py-4">
+                                            Department / Category
+                                        </th>
                                         <th className="px-6 py-4">Slug</th>
-                                        <th className="px-6 py-4">Subcategories</th>
-                                        <th className="px-6 py-4">Total Products</th>
+                                        <th className="px-6 py-4">
+                                            Subcategories
+                                        </th>
+                                        <th className="px-6 py-4">
+                                            Total Products
+                                        </th>
                                         <th className="px-6 py-4">Status</th>
-                                        <th className="px-6 py-4 text-right">Actions</th>
+                                        <th className="px-6 py-4 text-right">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-2 text-xs">
                                     {parentCategories.map((cat) => (
-                                        <tr key={cat.id} className="hover:bg-gray-1/50 transition">
+                                        <tr
+                                            key={cat.id}
+                                            className="transition hover:bg-gray-1/50"
+                                        >
                                             {/* Department / Category with Real Icon */}
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-10 h-10 rounded-xl bg-gray-1 border border-gray-2 p-1.5 flex items-center justify-center shrink-0">
+                                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-2 bg-gray-1 p-1.5">
                                                         {cat.icon_url ? (
                                                             <img
-                                                                src={cat.icon_url}
+                                                                src={
+                                                                    cat.icon_url
+                                                                }
                                                                 alt={cat.name}
-                                                                className="w-full h-full object-contain"
-                                                                onError={(e) => {
-                                                                    (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.svg';
+                                                                className="h-full w-full object-contain"
+                                                                onError={(
+                                                                    e,
+                                                                ) => {
+                                                                    (
+                                                                        e.currentTarget as HTMLImageElement
+                                                                    ).src =
+                                                                        '/images/placeholder-product.svg';
                                                                 }}
                                                             />
                                                         ) : (
-                                                            <Tag className="w-5 h-5 text-dark-5" />
+                                                            <Tag className="text-dark-5 h-5 w-5" />
                                                         )}
                                                     </div>
                                                     <div>
-                                                        <span className="font-bold text-dark block">{cat.name}</span>
-                                                        <span className="text-[11px] text-dark-5 block">
+                                                        <span className="block font-bold text-dark">
+                                                            {cat.name}
+                                                        </span>
+                                                        <span className="text-dark-5 block text-[11px]">
                                                             ID: #{cat.id}
                                                         </span>
                                                     </div>
@@ -166,14 +198,17 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
                                             </td>
 
                                             {/* Slug */}
-                                            <td className="px-6 py-4 text-dark-4 font-mono text-[11px]">
+                                            <td className="px-6 py-4 font-mono text-[11px] text-dark-4">
                                                 {cat.slug}
                                             </td>
 
                                             {/* Subcategories Count */}
                                             <td className="px-6 py-4">
-                                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-blue-light-5 text-blue">
-                                                    {cat.children?.length ?? cat.children_count ?? 0} Subcategories
+                                                <span className="bg-blue-light-5 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium text-blue">
+                                                    {cat.children?.length ??
+                                                        cat.children_count ??
+                                                        0}{' '}
+                                                    Subcategories
                                                 </span>
                                             </td>
 
@@ -185,34 +220,43 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
                                             {/* Status */}
                                             <td className="px-6 py-4">
                                                 <span
-                                                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${
+                                                    className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ${
                                                         cat.is_active !== false
                                                             ? 'bg-green-light-6 text-green'
                                                             : 'bg-red-light-6 text-red'
                                                     }`}
                                                 >
                                                     <span
-                                                        className={`w-1.5 h-1.5 rounded-full ${
-                                                            cat.is_active !== false ? 'bg-green' : 'bg-red'
+                                                        className={`h-1.5 w-1.5 rounded-full ${
+                                                            cat.is_active !==
+                                                            false
+                                                                ? 'bg-green'
+                                                                : 'bg-red'
                                                         }`}
                                                     />
-                                                    {cat.is_active !== false ? 'Active' : 'Inactive'}
+                                                    {cat.is_active !== false
+                                                        ? 'Active'
+                                                        : 'Inactive'}
                                                 </span>
                                             </td>
 
                                             {/* Actions */}
-                                            <td className="px-6 py-4 text-right space-x-2">
+                                            <td className="space-x-2 px-6 py-4 text-right">
                                                 <button
                                                     type="button"
-                                                    onClick={() => openEditModal(cat)}
-                                                    className="px-3 py-1 rounded border border-gray-3 text-dark-3 text-xs font-medium hover:border-blue hover:text-blue transition cursor-pointer"
+                                                    onClick={() =>
+                                                        openEditModal(cat)
+                                                    }
+                                                    className="cursor-pointer rounded border border-gray-3 px-3 py-1 text-xs font-medium text-dark-3 transition hover:border-blue hover:text-blue"
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
                                                     type="button"
-                                                    onClick={() => handleDelete(cat)}
-                                                    className="px-3 py-1 rounded border border-red/20 text-red text-xs font-medium hover:bg-red/10 transition cursor-pointer"
+                                                    onClick={() =>
+                                                        handleDelete(cat)
+                                                    }
+                                                    className="cursor-pointer rounded border border-red/20 px-3 py-1 text-xs font-medium text-red transition hover:bg-red/10"
                                                 >
                                                     Delete
                                                 </button>
@@ -227,42 +271,62 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
 
                 {/* Tab 2: Subcategories Table */}
                 {activeTab === 'subcategories' && (
-                    <div className="rounded-xl border border-gray-2 bg-white shadow-1 overflow-hidden">
+                    <div className="shadow-1 overflow-hidden rounded-xl border border-gray-2 bg-white">
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
+                            <table className="w-full border-collapse text-left">
                                 <thead>
-                                    <tr className="border-b border-gray-2 bg-gray-1 text-[11px] font-bold text-dark-4 uppercase tracking-wider">
-                                        <th className="px-6 py-4">Subcategory</th>
-                                        <th className="px-6 py-4">Parent Department</th>
+                                    <tr className="border-b border-gray-2 bg-gray-1 text-[11px] font-bold tracking-wider text-dark-4 uppercase">
+                                        <th className="px-6 py-4">
+                                            Subcategory
+                                        </th>
+                                        <th className="px-6 py-4">
+                                            Parent Department
+                                        </th>
                                         <th className="px-6 py-4">Slug</th>
-                                        <th className="px-6 py-4">Total Products</th>
+                                        <th className="px-6 py-4">
+                                            Total Products
+                                        </th>
                                         <th className="px-6 py-4">Status</th>
-                                        <th className="px-6 py-4 text-right">Actions</th>
+                                        <th className="px-6 py-4 text-right">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-2 text-xs">
                                     {subcategories.map((sub) => (
-                                        <tr key={sub.id} className="hover:bg-gray-1/50 transition">
+                                        <tr
+                                            key={sub.id}
+                                            className="transition hover:bg-gray-1/50"
+                                        >
                                             {/* Subcategory Name & Real Icon */}
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-9 h-9 rounded-xl bg-gray-1 border border-gray-2 p-1.5 flex items-center justify-center shrink-0">
+                                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-gray-2 bg-gray-1 p-1.5">
                                                         {sub.icon_url ? (
                                                             <img
-                                                                src={sub.icon_url}
+                                                                src={
+                                                                    sub.icon_url
+                                                                }
                                                                 alt={sub.name}
-                                                                className="w-full h-full object-contain"
-                                                                onError={(e) => {
-                                                                    (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.svg';
+                                                                className="h-full w-full object-contain"
+                                                                onError={(
+                                                                    e,
+                                                                ) => {
+                                                                    (
+                                                                        e.currentTarget as HTMLImageElement
+                                                                    ).src =
+                                                                        '/images/placeholder-product.svg';
                                                                 }}
                                                             />
                                                         ) : (
-                                                            <FolderTree className="w-4 h-4 text-dark-5" />
+                                                            <FolderTree className="text-dark-5 h-4 w-4" />
                                                         )}
                                                     </div>
                                                     <div>
-                                                        <span className="font-bold text-dark block">{sub.name}</span>
-                                                        <span className="text-[11px] text-dark-5 block">
+                                                        <span className="block font-bold text-dark">
+                                                            {sub.name}
+                                                        </span>
+                                                        <span className="text-dark-5 block text-[11px]">
                                                             ID: #{sub.id}
                                                         </span>
                                                     </div>
@@ -271,14 +335,15 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
 
                                             {/* Parent Category */}
                                             <td className="px-6 py-4">
-                                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-light-5 text-blue">
-                                                    <Tag className="w-3 h-3" />
-                                                    {sub.parent?.name || 'Unassigned'}
+                                                <span className="bg-blue-light-5 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold text-blue">
+                                                    <Tag className="h-3 w-3" />
+                                                    {sub.parent?.name ||
+                                                        'Unassigned'}
                                                 </span>
                                             </td>
 
                                             {/* Slug */}
-                                            <td className="px-6 py-4 text-dark-4 font-mono text-[11px]">
+                                            <td className="px-6 py-4 font-mono text-[11px] text-dark-4">
                                                 {sub.slug}
                                             </td>
 
@@ -290,34 +355,43 @@ export default function AdminCategories({ parentCategories, subcategories }: Cat
                                             {/* Status */}
                                             <td className="px-6 py-4">
                                                 <span
-                                                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${
+                                                    className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ${
                                                         sub.is_active !== false
                                                             ? 'bg-green-light-6 text-green'
                                                             : 'bg-red-light-6 text-red'
                                                     }`}
                                                 >
                                                     <span
-                                                        className={`w-1.5 h-1.5 rounded-full ${
-                                                            sub.is_active !== false ? 'bg-green' : 'bg-red'
+                                                        className={`h-1.5 w-1.5 rounded-full ${
+                                                            sub.is_active !==
+                                                            false
+                                                                ? 'bg-green'
+                                                                : 'bg-red'
                                                         }`}
                                                     />
-                                                    {sub.is_active !== false ? 'Active' : 'Inactive'}
+                                                    {sub.is_active !== false
+                                                        ? 'Active'
+                                                        : 'Inactive'}
                                                 </span>
                                             </td>
 
                                             {/* Actions */}
-                                            <td className="px-6 py-4 text-right space-x-2">
+                                            <td className="space-x-2 px-6 py-4 text-right">
                                                 <button
                                                     type="button"
-                                                    onClick={() => openEditModal(sub)}
-                                                    className="px-3 py-1 rounded border border-gray-3 text-dark-3 text-xs font-medium hover:border-blue hover:text-blue transition cursor-pointer"
+                                                    onClick={() =>
+                                                        openEditModal(sub)
+                                                    }
+                                                    className="cursor-pointer rounded border border-gray-3 px-3 py-1 text-xs font-medium text-dark-3 transition hover:border-blue hover:text-blue"
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
                                                     type="button"
-                                                    onClick={() => handleDelete(sub)}
-                                                    className="px-3 py-1 rounded border border-red/20 text-red text-xs font-medium hover:bg-red/10 transition cursor-pointer"
+                                                    onClick={() =>
+                                                        handleDelete(sub)
+                                                    }
+                                                    className="cursor-pointer rounded border border-red/20 px-3 py-1 text-xs font-medium text-red transition hover:bg-red/10"
                                                 >
                                                     Delete
                                                 </button>

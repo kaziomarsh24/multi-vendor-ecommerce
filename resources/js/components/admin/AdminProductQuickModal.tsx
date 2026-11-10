@@ -47,7 +47,9 @@ export default function AdminProductQuickModal({
                 title: product.title,
                 sku: product.sku,
                 base_price: String(product.base_price),
-                compare_price: product.compare_price ? String(product.compare_price) : '',
+                compare_price: product.compare_price
+                    ? String(product.compare_price)
+                    : '',
                 description: product.description || '',
                 is_approved: product.is_approved,
             });
@@ -75,47 +77,64 @@ export default function AdminProductQuickModal({
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-gray-100 max-h-[90vh] overflow-y-auto">
-                <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
+            <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-gray-100 bg-white p-6 shadow-xl">
+                <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3">
                     <div>
                         <h3 className="text-base font-bold text-gray-900">
-                            {mode === 'create' ? 'Quick Add to Catalog' : 'Edit Catalog Product'}
+                            {mode === 'create'
+                                ? 'Quick Add to Catalog'
+                                : 'Edit Catalog Product'}
                         </h3>
                         {mode === 'edit' && product && (
-                            <p className="text-xs text-gray-500">{product.title}</p>
+                            <p className="text-xs text-gray-500">
+                                {product.title}
+                            </p>
                         )}
                     </div>
                     <button
                         type="button"
                         onClick={handleClose}
-                        className="text-gray-400 hover:text-gray-600 p-1 rounded-lg cursor-pointer"
+                        className="cursor-pointer rounded-lg p-1 text-gray-400 hover:text-gray-600"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">Product Title *</label>
+                        <label className="mb-1 block font-semibold text-gray-700">
+                            Product Title *
+                        </label>
                         <input
                             type="text"
                             required
                             placeholder="e.g. Apple MacBook Pro 16 M3 Max"
                             value={data.title}
                             onChange={(e) => setData('title', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 outline-none"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue-600"
                         />
-                        {errors.title && <span className="text-rose-600 text-[11px]">{errors.title}</span>}
+                        {errors.title && (
+                            <span className="text-[11px] text-rose-600">
+                                {errors.title}
+                            </span>
+                        )}
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">Category *</label>
+                            <label className="mb-1 block font-semibold text-gray-700">
+                                Category *
+                            </label>
                             <select
                                 value={data.category_id}
-                                onChange={(e) => setData('category_id', Number(e.target.value))}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 outline-none"
+                                onChange={(e) =>
+                                    setData(
+                                        'category_id',
+                                        Number(e.target.value),
+                                    )
+                                }
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue-600"
                             >
                                 {categories.map((c) => (
                                     <option key={c.id} value={c.id}>
@@ -125,7 +144,7 @@ export default function AdminProductQuickModal({
                             </select>
                         </div>
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">
+                            <label className="mb-1 block font-semibold text-gray-700">
                                 {mode === 'create' ? 'SKU (Optional)' : 'SKU *'}
                             </label>
                             <input
@@ -134,68 +153,80 @@ export default function AdminProductQuickModal({
                                 placeholder="e.g. MBP-16-M3"
                                 value={data.sku}
                                 onChange={(e) => setData('sku', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 outline-none font-mono"
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 font-mono text-xs outline-none focus:ring-1 focus:ring-blue-600"
                             />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">Reference Base Price (৳) *</label>
+                            <label className="mb-1 block font-semibold text-gray-700">
+                                Reference Base Price (৳) *
+                            </label>
                             <input
                                 type="number"
                                 step="0.01"
                                 required
                                 placeholder="e.g. 185000"
                                 value={data.base_price}
-                                onChange={(e) => setData('base_price', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 outline-none"
+                                onChange={(e) =>
+                                    setData('base_price', e.target.value)
+                                }
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue-600"
                             />
                         </div>
                         <div>
-                            <label className="block font-semibold text-gray-700 mb-1">Original MRP / Compare (৳)</label>
+                            <label className="mb-1 block font-semibold text-gray-700">
+                                Original MRP / Compare (৳)
+                            </label>
                             <input
                                 type="number"
                                 step="0.01"
                                 placeholder="e.g. 210000"
                                 value={data.compare_price}
-                                onChange={(e) => setData('compare_price', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 outline-none"
+                                onChange={(e) =>
+                                    setData('compare_price', e.target.value)
+                                }
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue-600"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block font-semibold text-gray-700 mb-1">Technical Specs & Description</label>
+                        <label className="mb-1 block font-semibold text-gray-700">
+                            Technical Specs & Description
+                        </label>
                         <textarea
                             rows={3}
                             placeholder="Key features, specifications, and warranty details..."
                             value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 outline-none"
+                            onChange={(e) =>
+                                setData('description', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-blue-600"
                         />
                     </div>
 
-                    <div className="pt-4 border-t border-gray-100 flex items-center justify-end gap-3">
+                    <div className="flex items-center justify-end gap-3 border-t border-gray-100 pt-4">
                         <button
                             type="button"
                             onClick={handleClose}
-                            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 cursor-pointer"
+                            className="cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={processing}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-semibold flex items-center gap-1.5 shadow-sm cursor-pointer"
+                            className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-blue-600 px-5 py-2 font-semibold text-white shadow-sm hover:bg-blue-700"
                         >
-                            <Save className="w-4 h-4" />
+                            <Save className="h-4 w-4" />
                             <span>
                                 {processing
                                     ? 'Saving...'
                                     : mode === 'create'
-                                    ? 'Publish to Catalog'
-                                    : 'Save Changes'}
+                                      ? 'Publish to Catalog'
+                                      : 'Save Changes'}
                             </span>
                         </button>
                     </div>

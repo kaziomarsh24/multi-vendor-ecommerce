@@ -9,10 +9,14 @@ import {
     Phone,
     MapPin,
     Search,
-    ShoppingBag,
     SlidersHorizontal,
 } from 'lucide-react';
-import type { Shop, ShopProduct, Category, PaginatedData } from '@/types/ecommerce';
+import type {
+    Shop,
+    ShopProduct,
+    Category,
+    PaginatedData,
+} from '@/types/ecommerce';
 
 interface ShopShowProps {
     shop: Shop;
@@ -26,25 +30,37 @@ interface ShopShowProps {
     };
 }
 
-export default function ShopShow({ shop, products, categories, filters }: ShopShowProps) {
-    const formatBDT = (amount: string | number | null | undefined) => {
-        if (!amount) return '৳0';
-        return `৳${Number(amount).toLocaleString('en-US')}`;
-    };
-
+export default function ShopShow({
+    shop,
+    products,
+    categories,
+    filters,
+}: ShopShowProps) {
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const search = formData.get('search') as string;
-        router.get(`/shops/${shop.slug}`, { ...filters, search }, { preserveState: true });
+        router.get(
+            `/shops/${shop.slug}`,
+            { ...filters, search },
+            { preserveState: true },
+        );
     };
 
     const handleCategoryFilter = (slug: string | null) => {
-        router.get(`/shops/${shop.slug}`, { ...filters, category: slug || undefined }, { preserveState: true });
+        router.get(
+            `/shops/${shop.slug}`,
+            { ...filters, category: slug || undefined },
+            { preserveState: true },
+        );
     };
 
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        router.get(`/shops/${shop.slug}`, { ...filters, sort: e.target.value }, { preserveState: true });
+        router.get(
+            `/shops/${shop.slug}`,
+            { ...filters, sort: e.target.value },
+            { preserveState: true },
+        );
     };
 
     return (
@@ -53,7 +69,7 @@ export default function ShopShow({ shop, products, categories, filters }: ShopSh
 
             {/* Shop Header Banner */}
             <div
-                className="relative bg-[#1C2434] text-white py-10 sm:py-14 border-b border-gray-800 bg-cover bg-center overflow-hidden"
+                className="relative overflow-hidden border-b border-gray-800 bg-[#1C2434] bg-cover bg-center py-10 text-white sm:py-14"
                 style={
                     shop.banner_url
                         ? {
@@ -64,73 +80,85 @@ export default function ShopShow({ shop, products, categories, filters }: ShopSh
                           }
                 }
             >
-                <div className="max-w-292.5 mx-auto px-4 sm:px-8">
+                <div className="mx-auto max-w-292.5 px-4 sm:px-8">
                     {/* Breadcrumb Navigation on Banner */}
-                    <div className="flex items-center gap-2 text-xs text-gray-400 mb-6 font-medium">
-                        <Link href="/" className="hover:text-white transition">Home</Link>
+                    <div className="mb-6 flex items-center gap-2 text-xs font-medium text-gray-400">
+                        <Link href="/" className="transition hover:text-white">
+                            Home
+                        </Link>
                         <span>/</span>
                         <span className="text-gray-500">Shops</span>
                         <span>/</span>
-                        <span className="text-white font-semibold">{shop.name}</span>
+                        <span className="font-semibold text-white">
+                            {shop.name}
+                        </span>
                     </div>
 
                     {/* Shop Identity */}
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
                         <div className="flex items-center gap-4 sm:gap-6">
                             {/* Logo / Avatar with Link */}
                             <Link
                                 href={`/shops/${shop.slug}`}
-                                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/10 backdrop-blur-xs p-1.5 border border-white/20 flex items-center justify-center shrink-0 shadow-lg hover:border-blue-400 transition"
+                                className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/10 p-1.5 shadow-lg backdrop-blur-xs transition hover:border-blue-400 sm:h-20 sm:w-20"
                                 title={shop.name}
                             >
                                 {shop.logo_url ? (
                                     <img
                                         src={shop.logo_url}
                                         alt={shop.name}
-                                        className="max-h-full max-w-full object-contain rounded-xl"
+                                        className="max-h-full max-w-full rounded-xl object-contain"
                                         onError={(e) => {
-                                            (e.currentTarget as HTMLElement).style.display = 'none';
+                                            (
+                                                e.currentTarget as HTMLElement
+                                            ).style.display = 'none';
                                         }}
                                     />
                                 ) : (
-                                    <div className="w-full h-full rounded-xl bg-blue text-white font-extrabold text-2xl sm:text-3xl flex items-center justify-center">
-                                        {shop.name.substring(0, 2).toUpperCase()}
+                                    <div className="flex h-full w-full items-center justify-center rounded-xl bg-blue text-2xl font-extrabold text-white sm:text-3xl">
+                                        {shop.name
+                                            .substring(0, 2)
+                                            .toUpperCase()}
                                     </div>
                                 )}
                             </Link>
 
                             <div>
-                                <div className="flex items-center gap-2.5 flex-wrap">
-                                    <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
+                                <div className="flex flex-wrap items-center gap-2.5">
+                                    <h1 className="text-xl font-extrabold tracking-tight text-white sm:text-2xl lg:text-3xl">
                                         {shop.name}
                                     </h1>
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                                        <ShieldCheck className="w-3.5 h-3.5" />
+                                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-400">
+                                        <ShieldCheck className="h-3.5 w-3.5" />
                                         Verified Shop
                                     </span>
                                 </div>
 
                                 {shop.description && (
-                                    <p className="text-xs text-gray-300 mt-1.5 max-w-2xl leading-relaxed">
+                                    <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-gray-300">
                                         {shop.description}
                                     </p>
                                 )}
 
-                                <div className="flex items-center gap-4 text-xs text-gray-400 mt-3 flex-wrap">
+                                <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-gray-400">
                                     {shop.address && (
                                         <span className="flex items-center gap-1.5">
-                                            <MapPin className="w-3.5 h-3.5 text-blue-400" />
+                                            <MapPin className="h-3.5 w-3.5 text-blue-400" />
                                             {shop.address}
                                         </span>
                                     )}
                                     {shop.phone && (
                                         <span className="flex items-center gap-1.5">
-                                            <Phone className="w-3.5 h-3.5 text-blue-400" />
+                                            <Phone className="h-3.5 w-3.5 text-blue-400" />
                                             {shop.phone}
                                         </span>
                                     )}
-                                    <span className="text-gray-400 font-medium">
-                                        {products.total} {products.total === 1 ? 'item' : 'items'} available
+                                    <span className="font-medium text-gray-400">
+                                        {products.total}{' '}
+                                        {products.total === 1
+                                            ? 'item'
+                                            : 'items'}{' '}
+                                        available
                                     </span>
                                 </div>
                             </div>
@@ -140,15 +168,15 @@ export default function ShopShow({ shop, products, categories, filters }: ShopSh
             </div>
 
             {/* Shop Product Catalog Area */}
-            <div className="max-w-292.5 mx-auto px-4 sm:px-8 py-8 sm:py-10">
+            <div className="mx-auto max-w-292.5 px-4 py-8 sm:px-8 sm:py-10">
                 {/* Search & Filter Toolbar */}
-                <div className="bg-white rounded-xl p-3.5 sm:p-4 border border-gray-200/80 shadow-2xs mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="mb-8 flex flex-col items-center justify-between gap-4 rounded-xl border border-gray-200/80 bg-white p-3.5 shadow-2xs sm:p-4 md:flex-row">
                     {/* Category Filter Pills */}
-                    <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+                    <div className="flex w-full scrollbar-none items-center gap-2 overflow-x-auto pb-2 md:w-auto md:pb-0">
                         <button
                             type="button"
                             onClick={() => handleCategoryFilter(null)}
-                            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
+                            className={`cursor-pointer rounded-lg px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap transition ${
                                 !filters.category
                                     ? 'bg-blue text-white shadow-2xs'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -161,7 +189,7 @@ export default function ShopShow({ shop, products, categories, filters }: ShopSh
                                 key={cat.id}
                                 type="button"
                                 onClick={() => handleCategoryFilter(cat.slug)}
-                                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
+                                className={`cursor-pointer rounded-lg px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap transition ${
                                     filters.category === cat.slug
                                         ? 'bg-blue text-white shadow-2xs'
                                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -173,28 +201,35 @@ export default function ShopShow({ shop, products, categories, filters }: ShopSh
                     </div>
 
                     {/* Search & Sort Controls */}
-                    <div className="flex items-center gap-3 w-full md:w-auto">
-                        <form onSubmit={handleSearch} className="relative flex-1 md:w-56">
+                    <div className="flex w-full items-center gap-3 md:w-auto">
+                        <form
+                            onSubmit={handleSearch}
+                            className="relative flex-1 md:w-56"
+                        >
                             <input
                                 type="text"
                                 name="search"
                                 defaultValue={filters.search || ''}
                                 placeholder="Search products..."
-                                className="w-full pl-8 pr-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue transition"
+                                className="w-full rounded-lg border border-gray-200 bg-gray-50 py-1.5 pr-3 pl-8 text-xs transition focus:border-blue focus:outline-none"
                             />
-                            <Search className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5" />
+                            <Search className="absolute top-2.5 left-2.5 h-3.5 w-3.5 text-gray-400" />
                         </form>
 
-                        <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-1.5">
-                            <SlidersHorizontal className="w-3.5 h-3.5 text-gray-400" />
+                        <div className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1.5">
+                            <SlidersHorizontal className="h-3.5 w-3.5 text-gray-400" />
                             <select
                                 value={filters.sort || 'latest'}
                                 onChange={handleSortChange}
-                                className="text-xs text-gray-700 bg-transparent border-none focus:ring-0 py-0 pl-1 pr-6 font-medium cursor-pointer"
+                                className="cursor-pointer border-none bg-transparent py-0 pr-6 pl-1 text-xs font-medium text-gray-700 focus:ring-0"
                             >
                                 <option value="latest">Latest</option>
-                                <option value="price_low">Price: Low to High</option>
-                                <option value="price_high">Price: High to Low</option>
+                                <option value="price_low">
+                                    Price: Low to High
+                                </option>
+                                <option value="price_high">
+                                    Price: High to Low
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -203,41 +238,44 @@ export default function ShopShow({ shop, products, categories, filters }: ShopSh
                 {/* Product Grid */}
                 {products.data.length > 0 ? (
                     <>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                        {products.data.map((item) => (
-                            <ProductCard
-                                key={item.id}
-                                item={item}
-                                shopSlug={shop.slug}
-                                showShop={false}
-                                showStock={true}
-                            />
-                        ))}
-                    </div>
+                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+                            {products.data.map((item) => (
+                                <ProductCard
+                                    key={item.id}
+                                    item={item}
+                                    shopSlug={shop.slug}
+                                    showShop={false}
+                                    showStock={true}
+                                />
+                            ))}
+                        </div>
 
-                    {/* Pagination */}
-                    <Pagination
-                        links={products.links}
-                        from={products.from}
-                        to={products.to}
-                        total={products.total}
-                        className="mt-8"
-                    />
+                        {/* Pagination */}
+                        <Pagination
+                            links={products.links}
+                            from={products.from}
+                            to={products.to}
+                            total={products.total}
+                            className="mt-8"
+                        />
                     </>
                 ) : (
                     /* Clean Empty State */
-                    <div className="bg-white rounded-2xl p-12 text-center border border-gray-200/80 max-w-lg mx-auto shadow-sm">
-                        <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue flex items-center justify-center mx-auto mb-4">
-                            <Store className="w-8 h-8" />
+                    <div className="mx-auto max-w-lg rounded-2xl border border-gray-200/80 bg-white p-12 text-center shadow-sm">
+                        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-blue">
+                            <Store className="h-8 w-8" />
                         </div>
-                        <h3 className="text-base font-bold text-gray-900 mb-1">No products currently stocked in this shop</h3>
-                        <p className="text-xs text-gray-500 mb-6 leading-relaxed">
-                            {shop.name} has not stocked any products yet, or products are currently out of stock.
+                        <h3 className="mb-1 text-base font-bold text-gray-900">
+                            No products currently stocked in this shop
+                        </h3>
+                        <p className="mb-6 text-xs leading-relaxed text-gray-500">
+                            {shop.name} has not stocked any products yet, or
+                            products are currently out of stock.
                         </p>
                         <div className="flex items-center justify-center gap-3">
                             <Link
                                 href="/"
-                                className="bg-blue hover:bg-blue/90 text-white text-xs font-semibold px-4 py-2 rounded-lg transition"
+                                className="rounded-lg bg-blue px-4 py-2 text-xs font-semibold text-white transition hover:bg-blue/90"
                             >
                                 Browse All Products
                             </Link>

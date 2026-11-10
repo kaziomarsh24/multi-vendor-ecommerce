@@ -45,7 +45,8 @@ export default function CategoryModal({
             setImagePreview(null);
             form.setData({
                 _method: 'POST',
-                parent_id: targetType === 'sub' ? parentCategories[0]?.id || '' : '',
+                parent_id:
+                    targetType === 'sub' ? parentCategories[0]?.id || '' : '',
                 name: '',
                 icon: null,
                 is_active: true,
@@ -104,25 +105,25 @@ export default function CategoryModal({
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
+            <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-gray-100 bg-white p-6 shadow-xl sm:p-7">
                 {/* Modal Header */}
-                <div className="flex items-center justify-between pb-3.5 border-b border-gray-100 mb-5">
+                <div className="mb-5 flex items-center justify-between border-b border-gray-100 pb-3.5">
                     <h3 className="text-base font-bold text-dark">
                         {mode === 'create'
                             ? targetType === 'primary'
                                 ? 'Add New Category'
                                 : 'Add New Subcategory'
                             : targetType === 'primary'
-                            ? 'Edit Category'
-                            : 'Edit Subcategory'}
+                              ? 'Edit Category'
+                              : 'Edit Subcategory'}
                     </h3>
                     <button
                         type="button"
                         onClick={handleClose}
-                        className="text-gray-400 hover:text-dark p-1 rounded-lg transition cursor-pointer"
+                        className="cursor-pointer rounded-lg p-1 text-gray-400 transition hover:text-dark"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
 
@@ -131,16 +132,21 @@ export default function CategoryModal({
                     {/* If Subcategory: Select Parent Category */}
                     {targetType === 'sub' && (
                         <div>
-                            <label className="block font-semibold text-dark mb-1.5">
-                                Parent Category <span className="text-rose-600">*</span>
+                            <label className="mb-1.5 block font-semibold text-dark">
+                                Parent Category{' '}
+                                <span className="text-rose-600">*</span>
                             </label>
                             <select
                                 required
                                 value={form.data.parent_id}
-                                onChange={(e) => form.setData('parent_id', e.target.value)}
-                                className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition"
+                                onChange={(e) =>
+                                    form.setData('parent_id', e.target.value)
+                                }
+                                className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
                             >
-                                <option value="">-- Select Parent Department --</option>
+                                <option value="">
+                                    -- Select Parent Department --
+                                </option>
                                 {parentCategories.map((p) => (
                                     <option key={p.id} value={p.id}>
                                         {p.name}
@@ -148,15 +154,19 @@ export default function CategoryModal({
                                 ))}
                             </select>
                             {form.errors.parent_id && (
-                                <span className="text-rose-600 text-[11px]">{form.errors.parent_id}</span>
+                                <span className="text-[11px] text-rose-600">
+                                    {form.errors.parent_id}
+                                </span>
                             )}
                         </div>
                     )}
 
                     {/* Category Name */}
                     <div>
-                        <label className="block font-semibold text-dark mb-1.5">
-                            {targetType === 'primary' ? 'Category Name' : 'Subcategory Name'}{' '}
+                        <label className="mb-1.5 block font-semibold text-dark">
+                            {targetType === 'primary'
+                                ? 'Category Name'
+                                : 'Subcategory Name'}{' '}
                             <span className="text-rose-600">*</span>
                         </label>
                         <input
@@ -168,40 +178,46 @@ export default function CategoryModal({
                                     : 'e.g. Mechanical Keyboards'
                             }
                             value={form.data.name}
-                            onChange={(e) => form.setData('name', e.target.value)}
-                            className="w-full bg-white border border-gray-3 rounded-lg px-3.5 py-2.5 text-dark text-sm focus:outline-none focus:border-blue transition font-medium"
+                            onChange={(e) =>
+                                form.setData('name', e.target.value)
+                            }
+                            className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm font-medium text-dark transition focus:border-blue focus:outline-none"
                         />
                         {form.errors.name && (
-                            <span className="text-rose-600 text-[11px]">{form.errors.name}</span>
+                            <span className="text-[11px] text-rose-600">
+                                {form.errors.name}
+                            </span>
                         )}
                     </div>
 
                     {/* Real Image / Icon Upload with Live Preview */}
                     <div>
-                        <label className="block font-semibold text-dark mb-1.5">
-                            {targetType === 'primary' ? 'Category Icon' : 'Subcategory Icon'}
+                        <label className="mb-1.5 block font-semibold text-dark">
+                            {targetType === 'primary'
+                                ? 'Category Icon'
+                                : 'Subcategory Icon'}
                         </label>
 
                         {imagePreview ? (
                             <div className="flex items-center gap-4">
-                                <div className="relative w-20 h-20 rounded-xl border border-gray-3 bg-gray-1 p-2 flex items-center justify-center shrink-0 group">
+                                <div className="group relative flex h-20 w-20 shrink-0 items-center justify-center rounded-xl border border-gray-3 bg-gray-1 p-2">
                                     <img
                                         src={imagePreview}
                                         alt="Preview"
-                                        className="max-h-full max-w-full object-contain rounded"
+                                        className="max-h-full max-w-full rounded object-contain"
                                     />
                                     <button
                                         type="button"
                                         onClick={removeImage}
-                                        className="absolute -top-2 -right-2 bg-rose-600 hover:bg-rose-700 text-white rounded-full p-1 shadow-md transition cursor-pointer"
+                                        className="absolute -top-2 -right-2 cursor-pointer rounded-full bg-rose-600 p-1 text-white shadow-md transition hover:bg-rose-700"
                                         title="Remove image"
                                     >
-                                        <X className="w-3 h-3" />
+                                        <X className="h-3 w-3" />
                                     </button>
                                 </div>
 
-                                <label className="px-3.5 py-2 rounded-lg border border-gray-3 bg-white text-dark text-xs font-medium hover:border-blue hover:text-blue transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
-                                    <Upload className="w-3.5 h-3.5" />
+                                <label className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-gray-3 bg-white px-3.5 py-2 text-xs font-medium text-dark shadow-2xs transition hover:border-blue hover:text-blue">
+                                    <Upload className="h-3.5 w-3.5" />
                                     <span>Change</span>
                                     <input
                                         type="file"
@@ -212,8 +228,8 @@ export default function CategoryModal({
                                 </label>
                             </div>
                         ) : (
-                            <label className="border-2 border-dashed border-gray-3 hover:border-blue rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer bg-gray-50/50 hover:bg-blue/5 transition">
-                                <Upload className="w-5 h-5 text-dark-4 mb-1.5" />
+                            <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-3 bg-gray-50/50 p-5 transition hover:border-blue hover:bg-blue/5">
+                                <Upload className="mb-1.5 h-5 w-5 text-dark-4" />
                                 <span className="text-xs font-medium text-dark">
                                     Upload icon
                                 </span>
@@ -226,18 +242,22 @@ export default function CategoryModal({
                             </label>
                         )}
                         {form.errors.icon && (
-                            <span className="text-rose-600 text-[11px]">{form.errors.icon}</span>
+                            <span className="text-[11px] text-rose-600">
+                                {form.errors.icon}
+                            </span>
                         )}
                     </div>
 
                     {/* Status Toggle */}
-                    <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
-                        <label className="flex items-center gap-2.5 cursor-pointer">
+                    <div className="flex items-center justify-between border-t border-gray-100 pt-2">
+                        <label className="flex cursor-pointer items-center gap-2.5">
                             <input
                                 type="checkbox"
                                 checked={form.data.is_active}
-                                onChange={(e) => form.setData('is_active', e.target.checked)}
-                                className="w-4 h-4 rounded border-gray-3 text-blue focus:ring-blue cursor-pointer"
+                                onChange={(e) =>
+                                    form.setData('is_active', e.target.checked)
+                                }
+                                className="h-4 w-4 cursor-pointer rounded border-gray-3 text-blue focus:ring-blue"
                             />
                             <span className="text-xs font-medium text-dark">
                                 Active
@@ -246,26 +266,26 @@ export default function CategoryModal({
                     </div>
 
                     {/* Modal Actions */}
-                    <div className="pt-4 border-t border-gray-100 flex items-center justify-end gap-3">
+                    <div className="flex items-center justify-end gap-3 border-t border-gray-100 pt-4">
                         <button
                             type="button"
                             onClick={handleClose}
-                            className="px-4 py-2 border border-gray-3 rounded-lg text-dark-3 hover:bg-gray-1 font-medium text-xs transition cursor-pointer"
+                            className="cursor-pointer rounded-lg border border-gray-3 px-4 py-2 text-xs font-medium text-dark-3 transition hover:bg-gray-1"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={form.processing}
-                            className="bg-blue hover:bg-blue-dark text-white px-5 py-2 rounded-lg font-semibold text-xs flex items-center gap-1.5 shadow-2xs transition cursor-pointer disabled:opacity-70"
+                            className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-blue px-5 py-2 text-xs font-semibold text-white shadow-2xs transition hover:bg-blue-dark disabled:opacity-70"
                         >
-                            <Save className="w-4 h-4" />
+                            <Save className="h-4 w-4" />
                             <span>
                                 {form.processing
                                     ? 'Saving...'
                                     : mode === 'create'
-                                    ? 'Create Category'
-                                    : 'Save Changes'}
+                                      ? 'Create Category'
+                                      : 'Save Changes'}
                             </span>
                         </button>
                     </div>
