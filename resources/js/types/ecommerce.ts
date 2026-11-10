@@ -33,6 +33,7 @@ export interface Shop {
     phone?: string | null;
     address?: string | null;
     is_active: boolean;
+    is_verified?: boolean;
     shop_products_count?: number;
     owner?: User | null;
 }
@@ -58,6 +59,8 @@ export interface Product {
     category?: Category;
     subcategory?: Category | null;
     creator?: User;
+    created_by?: number;
+    shops_count?: number;
     shop_products_count?: number;
     shop_products?: ShopProduct[];
 }

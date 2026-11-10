@@ -139,10 +139,9 @@ export default function AdminShops({
                                                             {shop.name}
                                                         </span>
                                                         {shop.is_verified && (
-                                                            <ShieldCheck
-                                                                className="h-3.5 w-3.5 text-blue"
-                                                                title="Verified Merchant"
-                                                            />
+                                                            <span title="Verified Merchant">
+                                                                <ShieldCheck className="h-3.5 w-3.5 text-blue" />
+                                                            </span>
                                                         )}
                                                     </div>
                                                     <span className="text-dark-5 mt-0.5 block text-[11px]">
