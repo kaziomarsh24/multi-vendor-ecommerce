@@ -28,11 +28,13 @@ class DashboardController extends Controller
 
         $recentShops = Shop::with('owner')->withCount('shopProducts')->latest('id')->take(5)->get();
         $recentProducts = Product::with(['category', 'subcategory', 'creator'])->withCount('shopProducts')->latest('id')->take(5)->get();
+        $recentUsers = User::with('shop')->latest('id')->take(8)->get();
 
         return Inertia::render('Admin/Dashboard', [
             'stats' => $stats,
             'recentShops' => $recentShops,
             'recentProducts' => $recentProducts,
+            'recentUsers' => $recentUsers,
         ]);
     }
 }

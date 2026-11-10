@@ -2,7 +2,7 @@ import React from 'react';
 import { Head, Link } from '@inertiajs/react';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Plus, ExternalLink, ShieldCheck, Store } from 'lucide-react';
-import type { Shop, Product } from '@/types/ecommerce';
+import type { Shop, Product, User } from '@/types/ecommerce';
 
 interface DashboardShop extends Shop {
     shop_products_count?: number;
@@ -24,9 +24,10 @@ interface DashboardProps {
     };
     recentShops: DashboardShop[];
     recentProducts: DashboardProduct[];
+    recentUsers: (User & { shop?: Shop; created_at: string })[];
 }
 
-export default function Dashboard({ stats, recentShops, recentProducts }: DashboardProps) {
+export default function Dashboard({ stats, recentShops, recentProducts, recentUsers }: DashboardProps) {
     const formatBDT = (amount: string | number | null | undefined) => {
         if (!amount) return '৳0';
         return `৳${Number(amount).toLocaleString('en-US')}`;
@@ -200,6 +201,103 @@ export default function Dashboard({ stats, recentShops, recentProducts }: Dashbo
                                         </td>
                                     </tr>
                                 ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {/* Platform Users & Roles */}
+                <div className="bg-white rounded-xl border border-gray-3 overflow-hidden shadow-2xs">
+                    <div className="p-5 border-b border-gray-3 flex items-center justify-between">
+                        <div>
+                            <h2 className="font-bold text-sm text-dark">Platform Users & Roles</h2>
+                            <p className="text-[11px] text-dark-5 mt-0.5">Registered accounts across administrator, merchant, and customer roles</p>
+                        </div>
+                        <span className="text-xs font-semibold text-dark-4">
+                            {recentUsers.length} Recent Accounts
+                        </span>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr className="bg-gray-1 border-b border-gray-3 text-dark-4 uppercase font-bold text-[10px] tracking-wider">
+                                    <th className="py-3 px-5">User</th>
+                                    <th className="py-3 px-5">Role</th>
+                                    <th className="py-3 px-5">Assigned Shop</th>
+                                    <th className="py-3 px-5">Joined Date</th>
+                                    <th className="py-3 px-5 text-right">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-3">
+                                {recentUsers.map((u) => {
+                                    const roleBadge =
+                                        u.role === 'admin'
+                                            ? 'bg-purple-50 text-purple-700 border-purple-200'
+                                            : u.role === 'shop_owner'
+                                            ? 'bg-blue/10 text-blue border-blue/20'
+                                            : 'bg-gray-1 text-dark-4 border-gray-3';
+
+                                    const roleLabel =
+                                        u.role === 'admin'
+                                            ? 'Super Admin'
+                                            : u.role === 'shop_owner'
+                                            ? 'Shop Owner'
+                                            : 'Customer';
+
+                                    const initials = u.name
+                                        .split(' ')
+                                        .map((w) => w[0])
+                                        .slice(0, 2)
+                                        .join('')
+                                        .toUpperCase();
+
+                                    return (
+                                        <tr key={u.id} className="hover:bg-gray-1/50 transition">
+                                            <td className="py-3 px-5">
+                                                <div className="flex items-center gap-3">
+                                                    <span className="w-8 h-8 rounded-full bg-gray-2 text-dark font-bold text-[11px] flex items-center justify-center shrink-0 border border-gray-3">
+                                                        {initials}
+                                                    </span>
+                                                    <div>
+                                                        <span className="font-bold text-dark block">{u.name}</span>
+                                                        <span className="text-[11px] text-dark-5 block">{u.email}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="py-3 px-5">
+                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-semibold border ${roleBadge}`}>
+                                                    {roleLabel}
+                                                </span>
+                                            </td>
+                                            <td className="py-3 px-5 text-dark-3">
+                                                {u.shop ? (
+                                                    <Link
+                                                        href={`/shops/${u.shop.slug}`}
+                                                        className="font-medium text-dark hover:text-blue transition inline-flex items-center gap-1"
+                                                    >
+                                                        <span>{u.shop.name}</span>
+                                                    </Link>
+                                                ) : (
+                                                    <span className="text-dark-5 italic">Unassigned</span>
+                                                )}
+                                            </td>
+                                            <td className="py-3 px-5 text-dark-4">
+                                                {new Date(u.created_at).toLocaleDateString('en-US', {
+                                                    month: 'short',
+                                                    day: 'numeric',
+                                                    year: 'numeric',
+                                                })}
+                                            </td>
+                                            <td className="py-3 px-5 text-right">
+                                                <span className="inline-flex items-center gap-1.5 text-green text-[11px] font-semibold">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-green" />
+                                                    Active
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     </div>
