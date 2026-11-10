@@ -1,0 +1,883 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:hasEnabledTwoFactorAuthentication\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Settings/SecurityController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:passkeys\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Settings/SecurityController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/ShopOwner/InventoryController.php
+
+		-
+			message: '#^Parameter \#1 \$shop of method App\\Services\\ShopOwner\\InventoryService\:\:getInventory\(\) expects App\\Models\\Shop, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/ShopOwner/InventoryController.php
+
+		-
+			message: '#^Parameter \#1 \$shop of method App\\Services\\ShopOwner\\SharedCatalogService\:\:attachProduct\(\) expects App\\Models\\Shop, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/ShopOwner/SharedCatalogController.php
+
+		-
+			message: '#^Parameter \#1 \$shop of method App\\Services\\ShopOwner\\SharedCatalogService\:\:getCatalog\(\) expects App\\Models\\Shop, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/ShopOwner/SharedCatalogController.php
+
+		-
+			message: '#^Parameter \#1 \$shop of method App\\Services\\ShopOwner\\SharedCatalogService\:\:storeProduct\(\) expects App\\Models\\Shop, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/ShopOwner/SharedCatalogController.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Middleware/EnsureUserRole.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\Admin\\CategoryRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/Admin/CategoryRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\Admin\\StoreProductRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/Admin/StoreProductRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\Admin\\StoreShopRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/Admin/StoreShopRequest.php
+
+		-
+			message: '#^Access to an undefined property \(object\|string\)\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/Admin/UpdateProductRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\Admin\\UpdateProductRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/Admin/UpdateProductRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\Admin\\UpdateShopRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/Admin/UpdateShopRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\ShopOwner\\AttachProductRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/ShopOwner/AttachProductRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\ShopOwner\\StoreSharedProductRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/ShopOwner/StoreSharedProductRequest.php
+
+		-
+			message: '#^Access to an undefined property \(object\|string\)\:\:\$shop_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/ShopOwner/UpdateInventoryRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/ShopOwner/UpdateInventoryRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\ShopOwner\\UpdateInventoryRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/ShopOwner/UpdateInventoryRequest.php
+
+		-
+			message: '#^Access to an undefined property \(object\|string\)\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/ShopOwner/UpdateSharedProductRequest.php
+
+		-
+			message: '#^Access to an undefined property \(object\|string\)\:\:\$user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/ShopOwner/UpdateSharedProductRequest.php
+
+		-
+			message: '#^Method App\\Http\\Requests\\ShopOwner\\UpdateSharedProductRequest\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Requests/ShopOwner/UpdateSharedProductRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Category.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:slugSourceColumn\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Models/Category.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(App\\Models\\Category\) and ''slugSource'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Class App\\Models\\Category uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Method App\\Models\\Category\:\:children\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Method App\\Models\\Category\:\:iconUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Method App\\Models\\Category\:\:parent\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Method App\\Models\\Category\:\:products\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Method App\\Models\\Category\:\:scopeParentsOnly\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Method App\\Models\\Category\:\:scopeParentsOnly\(\) has parameter \$query with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Property App\\Models\\Category\:\:\$purgeableFiles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Product.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:slugSourceColumn\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Models/Product.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(App\\Models\\Product\) and ''slugSource'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Class App\\Models\\Product uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:category\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:creator\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:galleryThumbUrls\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:galleryUrls\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:shopProducts\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:shops\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany does not specify its types\: TRelatedModel, TDeclaringModel, TPivotModel, TAccessor \(2\-4 required\)$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:subcategory\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:thumbUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Method App\\Models\\Product\:\:thumbnailUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Parameter \#2 \$array of function array_map expects array, array\|string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Models/Product.php
+
+		-
+			message: '#^Property App\\Models\\Product\:\:\$cacheParents type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Property App\\Models\\Product\:\:\$purgeableFiles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: app/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:slugSourceColumn\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(App\\Models\\Shop\) and ''slugSource'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Method App\\Models\\Shop\:\:bannerUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Method App\\Models\\Shop\:\:logoUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Method App\\Models\\Shop\:\:owner\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Method App\\Models\\Shop\:\:products\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany does not specify its types\: TRelatedModel, TDeclaringModel, TPivotModel, TAccessor \(2\-4 required\)$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Method App\\Models\\Shop\:\:shopProducts\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Property App\\Models\\Shop\:\:\$purgeableFiles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: app/Models/Shop.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ShopProduct\:\:\$display_thumbnail\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$base_price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$compare_price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$gallery\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$thumbnail\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Class App\\Models\\ShopProduct uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:customThumbnailUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayComparePrice\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayDescription\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayGallery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayGalleryThumbUrls\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayGalleryUrls\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayPrice\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayThumbUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayThumbnail\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayThumbnailUrl\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:displayTitle\(\) return type with generic class Illuminate\\Database\\Eloquent\\Casts\\Attribute does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:product\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\ShopProduct\:\:shop\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Property App\\Models\\ShopProduct\:\:\$cacheParents type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Property App\\Models\\ShopProduct\:\:\$purgeableFiles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>gallery" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Models/ShopProduct.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:createdProducts\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:shop\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasOne does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Property App\\Models\\User\:\:\$purgeableFiles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\UserRole\:\:ADMIN will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\UserRole\:\:CUSTOMER will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\UserRole\:\:SHOP_OWNER will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Admin/CatalogService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CatalogService\:\:getPaginatedCatalog\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CatalogService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CatalogService\:\:store\(\) has parameter \$galleryFiles with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CatalogService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CatalogService\:\:store\(\) has parameter \$validated with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CatalogService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CatalogService\:\:update\(\) has parameter \$galleryFiles with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CatalogService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CatalogService\:\:update\(\) has parameter \$validated with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CatalogService.php
+
+		-
+			message: '#^Property App\\Services\\Admin\\CatalogService\:\:\$imageVariants type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CatalogService.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Admin/CategoryService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CategoryService\:\:createCategory\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CategoryService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CategoryService\:\:getCategoryList\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CategoryService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\CategoryService\:\:updateCategory\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/CategoryService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\User\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\User\>\:\:\$role\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\User\>\:\:update\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\ShopService\:\:createShop\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\ShopService\:\:getAvailableOwners\(\) return type with generic class Illuminate\\Database\\Eloquent\\Collection does not specify its types\: TKey, TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\ShopService\:\:getPaginatedShops\(\) return type with generic interface Illuminate\\Contracts\\Pagination\\LengthAwarePaginator does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Method App\\Services\\Admin\\ShopService\:\:updateShop\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and App\\Enums\\UserRole\:\:SHOP_OWNER will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 2
+			path: app/Services/Admin/ShopService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ShopProduct\:\:\$display_compare_price\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ShopProduct\:\:\$display_price\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\HomeService\:\:getAllCategories\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\HomeService\:\:getBestSellers\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\HomeService\:\:getFeaturedShops\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\HomeService\:\:getHeroDeals\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\HomeService\:\:getHomeData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\HomeService\:\:getNewArrivals\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\HomeService\:\:searchProducts\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between non\-falsy\-string and ''0'' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 2
+			path: app/Services/HomeService.php
+
+		-
+			message: '#^Method App\\Services\\ProductService\:\:getProductPageData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ProductService.php
+
+		-
+			message: '#^Method App\\Services\\ProductService\:\:getRelatedProducts\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/ProductService.php
+
+		-
+			message: '#^Method App\\Services\\ProductService\:\:getStockingShops\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/ProductService.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ShopOwner/InventoryService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\InventoryService\:\:getInventory\(\) has parameter \$filters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/InventoryService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\InventoryService\:\:getInventory\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/InventoryService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\InventoryService\:\:update\(\) has parameter \$customGallery with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/InventoryService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\InventoryService\:\:update\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/InventoryService.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\SharedCatalogService\:\:attachProduct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\SharedCatalogService\:\:getCatalog\(\) has parameter \$filters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\SharedCatalogService\:\:getCatalog\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\SharedCatalogService\:\:storeProduct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\SharedCatalogService\:\:storeProduct\(\) has parameter \$galleryFiles with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\SharedCatalogService\:\:updateProduct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\ShopOwner\\SharedCatalogService\:\:updateProduct\(\) has parameter \$galleryFiles with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ShopOwner/SharedCatalogService.php
+
+		-
+			message: '#^Method App\\Services\\StorefrontShopService\:\:getAllActiveShops\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/StorefrontShopService.php
+
+		-
+			message: '#^Method App\\Services\\StorefrontShopService\:\:getShopCategories\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/StorefrontShopService.php
+
+		-
+			message: '#^Method App\\Services\\StorefrontShopService\:\:getShopPageData\(\) has parameter \$filters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/StorefrontShopService.php
+
+		-
+			message: '#^Method App\\Services\\StorefrontShopService\:\:getShopPageData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/StorefrontShopService.php
+
+		-
+			message: '#^Method App\\Services\\StorefrontShopService\:\:getShopProducts\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Services/StorefrontShopService.php
+
+		-
+			message: '#^Method App\\Services\\StorefrontShopService\:\:getShopProducts\(\) has parameter \$filters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/StorefrontShopService.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/seeders/CategorySeeder.php
+
+		-
+			message: '#^Offset ''children'' on array\{name\: ''Audio & Sound'', slug\: ''audio\-sound'', image\: ''images/categories…'', children\: array\{array\{name\: ''Wireless Headphones'', slug\: ''wireless\-headphones'', image\: ''images/categories…''\}, array\{name\: ''Bluetooth Speakers'', slug\: ''bluetooth\-speakers'', image\: ''images/categories…''\}\}\}\|array\{name\: ''Laptops & Computers'', slug\: ''laptops\-computers'', image\: ''images/categories…'', children\: array\{array\{name\: ''MacBooks'', slug\: ''macbooks'', image\: ''images/categories…''\}, array\{name\: ''Desktops & All\-in…'', slug\: ''desktops'', image\: ''images/categories…''\}, array\{name\: ''Keyboards & Mice'', slug\: ''keyboards\-mice'', image\: ''images/categories…''\}\}\}\|array\{name\: ''Smartphones &…'', slug\: ''smartphones\-tablets'', image\: ''images/categories…'', children\: array\{array\{name\: ''Flagship Smartphones'', slug\: ''flagship\-smartphones'', image\: ''images/categories…''\}, array\{name\: ''Tablets & iPads'', slug\: ''tablets\-ipads'', image\: ''images/categories…''\}\}\}\|array\{name\: ''Wearables & Gadgets'', slug\: ''wearables'', image\: ''images/categories…'', children\: array\{array\{name\: ''Smartwatches'', slug\: ''smartwatches'', image\: ''images/categories…''\}\}\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: database/seeders/CategorySeeder.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/seeders/ProductSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\ProductSeeder\:\:seedShopInventories\(\) has parameter \$products with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/ProductSeeder.php
+
+		-
+			message: '#^Access to an undefined property KaziOmar\\SmartUpload\\DTO\\UploadCollection\|KaziOmar\\SmartUpload\\DTO\\UploadResult\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/seeders/ShopSeeder.php

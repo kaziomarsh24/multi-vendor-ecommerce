@@ -45,6 +45,16 @@ chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 # Ensure public storage link exists
 php artisan storage:link --force || true
 
+# Ensure frontend assets are built
+if [ ! -f /var/www/public/build/manifest.json ]; then
+    echo "Frontend assets missing. Building with npm..."
+    if [ ! -d /var/www/node_modules ]; then
+        echo "Installing node dependencies..."
+        npm install --no-audit --prefer-offline || npm install
+    fi
+    npm run build
+fi
+
 # Migrations & seeders
 if [ "$RUN_MIGRATIONS" = "true" ]; then
     echo "Running database migrations..."

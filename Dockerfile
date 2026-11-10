@@ -20,7 +20,9 @@ RUN apk add --no-cache \
     build-base \
     autoconf \
     bash \
-    shadow && \
+    shadow \
+    nodejs \
+    npm && \
     docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && \
     docker-php-ext-install -j$(nproc) gd pdo_mysql exif pcntl bcmath zip intl
 
