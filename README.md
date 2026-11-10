@@ -46,13 +46,13 @@ docker compose up -d --build
 
 Access the local storefront at `http://localhost:8080`.
 
-> **First-Time Initialization & Troubleshooting:**
-> On the very first boot, the container automatically verifies dependencies, executes database migrations, and seeds sample catalog records (typically takes 30-60 seconds). Nginx waits for the application container to become healthy before accepting traffic.
-> You can track the real-time background initialization with:
+> **First-Time Boot Initialization:**
+> On the first boot, the container entrypoint automatically verifies Composer dependencies, waits for the MySQL database to become healthy, runs database migrations, and seeds initial catalog records (taking roughly 30-60 seconds). Nginx automatically waits for this initialization to complete before serving requests.
+> You can track the real-time startup progress at any time using:
 > ```bash
 > docker compose logs -f app
 > ```
-> Once `ready to handle connections` appears, refresh `http://localhost:8080`. If you ever see a temporary `502 Bad Gateway` on fresh startup, simply wait a few moments for the background seeding to finish and refresh.
+> Once initialization completes, the storefront is live at `http://localhost:8080`.
 
 ---
 
