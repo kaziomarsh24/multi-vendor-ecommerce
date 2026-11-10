@@ -46,13 +46,7 @@ docker compose up -d --build
 
 Access the local storefront at `http://localhost:8080`.
 
-> **First-Time Boot Initialization:**
-> On the first boot, the container entrypoint automatically verifies Composer dependencies, waits for the MySQL database to become healthy, runs database migrations, and seeds initial catalog records (taking roughly 30-60 seconds). Nginx automatically waits for this initialization to complete before serving requests.
-> You can track the real-time startup progress at any time using:
-> ```bash
-> docker compose logs -f app
-> ```
-> Once initialization completes, the storefront is live at `http://localhost:8080`.
+> **First-Time Boot Note:** On initial boot, wait until the terminal finishes `Waiting` and reports all containers as `Started` (typically 30-60 seconds for migrations and seeders), then access `http://localhost:8080`.
 
 ---
 
