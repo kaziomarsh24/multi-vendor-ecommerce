@@ -9,9 +9,6 @@ import {
     LogOut,
     CheckCircle2,
     AlertCircle,
-    UserCheck,
-    ArrowUpRight,
-    ArrowRight,
 } from 'lucide-react';
 import type { User } from '@/types/ecommerce';
 
@@ -126,36 +123,6 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                                 >
                                     <Tag className="h-4 w-4 shrink-0" />
                                     <span>Categories</span>
-                                </Link>
-                            </nav>
-                        </div>
-
-                        <div>
-                            <span className="mb-2 block px-3 text-[10px] font-bold tracking-wider text-dark-4 uppercase">
-                                Portals
-                            </span>
-                            <nav className="space-y-1">
-                                <Link
-                                    href="/owner/inventory"
-                                    className="flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium text-dark-3 transition hover:bg-gray-1 hover:text-dark"
-                                >
-                                    <span className="flex items-center gap-2.5">
-                                        <UserCheck className="h-3.5 w-3.5 text-dark-4" />
-                                        <span>Merchant Portal</span>
-                                    </span>
-                                    <ArrowRight className="h-3 w-3 text-dark-4" />
-                                </Link>
-
-                                <Link
-                                    href="/"
-                                    target="_blank"
-                                    className="flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium text-dark-3 transition hover:bg-gray-1 hover:text-dark"
-                                >
-                                    <span className="flex items-center gap-2.5">
-                                        <ExternalLink className="h-3.5 w-3.5 text-dark-4" />
-                                        <span>View Storefront</span>
-                                    </span>
-                                    <ArrowUpRight className="h-3.5 w-3.5 text-dark-4" />
                                 </Link>
                             </nav>
                         </div>
