@@ -74,6 +74,30 @@ class ShopOwnerTest extends TestCase
         ]);
     }
 
+    public function test_shop_owner_can_create_new_catalog_product(): void
+    {
+        $owner = User::factory()->create(['role' => 'shop_owner']);
+        $shop = $this->createShopForOwner($owner);
+        $category = $this->createCategory();
+
+        $response = $this->actingAs($owner)->post('/owner/catalog', [
+            'category_id' => $category->id,
+            'title' => 'Brand New Gadget',
+            'base_price' => 250,
+            'description' => 'Innovative gadget',
+            'stock_quantity' => 30,
+        ]);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('products', [
+            'title' => 'Brand New Gadget',
+        ]);
+        $this->assertDatabaseHas('shop_products', [
+            'shop_id' => $shop->id,
+            'stock_quantity' => 30,
+        ]);
+    }
+
     public function test_shop_owner_can_update_inventory_pricing(): void
     {
         $owner = User::factory()->create(['role' => 'shop_owner']);

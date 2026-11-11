@@ -60,7 +60,9 @@ Route::middleware(['auth', 'role:shop_owner'])
 
         // Shared Catalog & Add to Shop
         Route::get('/catalog', [OwnerSharedCatalogController::class, 'index'])->name('catalog.index');
+        Route::post('/catalog', [OwnerSharedCatalogController::class, 'storeNew'])->name('catalog.store');
         Route::post('/catalog/attach', [OwnerSharedCatalogController::class, 'attach'])->name('catalog.attach');
+        Route::match(['put', 'post'], '/catalog/{product}', [OwnerSharedCatalogController::class, 'updateMaster'])->name('catalog.update');
         Route::post('/products/create', [OwnerSharedCatalogController::class, 'storeNew'])->name('products.storeNew');
         Route::match(['put', 'post'], '/products/{product}', [OwnerSharedCatalogController::class, 'updateMaster'])->name('products.updateMaster');
     });

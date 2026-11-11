@@ -217,7 +217,10 @@ export default function EditShopModal({
                                 .filter((o) => o.id !== shop.user_id)
                                 .map((o) => (
                                     <option key={o.id} value={o.id}>
-                                        {o.name} ({o.email})
+                                        {o.name} ({o.email}){' '}
+                                        {o.role
+                                            ? `— [${o.role === 'customer' ? 'Customer' : 'Shop Owner'}]`
+                                            : ''}
                                     </option>
                                 ))}
                         </select>

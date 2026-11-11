@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Shop;
+use App\Models\ShopProduct;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -117,11 +119,28 @@ class AdminCatalogTest extends TestCase
             'is_approved' => true,
         ]);
 
+        $shop = Shop::create([
+            'user_id' => $admin->id,
+            'name' => 'Test Shop',
+            'slug' => 'test-shop',
+            'is_active' => true,
+        ]);
+        $shopProduct = ShopProduct::create([
+            'shop_id' => $shop->id,
+            'product_id' => $product->id,
+            'custom_price' => 5000,
+            'stock_quantity' => 10,
+            'is_active' => true,
+        ]);
+
         $response = $this->actingAs($admin)->delete("/admin/catalog/{$product->id}");
 
         $response->assertSessionHasNoErrors();
         $this->assertSoftDeleted('products', [
             'id' => $product->id,
+        ]);
+        $this->assertSoftDeleted('shop_products', [
+            'id' => $shopProduct->id,
         ]);
     }
 }

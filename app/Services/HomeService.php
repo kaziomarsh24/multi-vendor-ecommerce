@@ -40,6 +40,7 @@ class HomeService
             ->where('is_active', true)
             ->where('stock_quantity', '>', 0)
             ->whereHas('shop', fn ($q) => $q->where('is_active', true))
+            ->whereHas('product')
             ->when($search, function ($q, $search) {
                 $q->where(function ($sub) use ($search) {
                     $sub->where('title', 'like', "%{$search}%")
@@ -65,6 +66,7 @@ class HomeService
                 ->where('is_active', true)
                 ->where('stock_quantity', '>', 0)
                 ->whereHas('shop', fn ($q) => $q->where('is_active', true))
+                ->whereHas('product')
                 ->with(['product.category', 'shop'])
                 ->get();
 
@@ -111,6 +113,7 @@ class HomeService
             ->where('is_active', true)
             ->where('stock_quantity', '>', 0)
             ->whereHas('shop', fn ($q) => $q->where('is_active', true))
+            ->whereHas('product')
             ->with(['product.category', 'shop'])
             ->latest('id')
             ->take(8)
@@ -126,6 +129,7 @@ class HomeService
             ->where('is_active', true)
             ->where('stock_quantity', '>', 0)
             ->whereHas('shop', fn ($q) => $q->where('is_active', true))
+            ->whereHas('product')
             ->with(['product.category', 'shop'])
             ->orderBy('id', 'asc')
             ->take(6)

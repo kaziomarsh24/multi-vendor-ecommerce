@@ -38,7 +38,7 @@ class ShopService
     {
         return User::where('role', '!=', UserRole::ADMIN)
             ->whereDoesntHave('shop')
-            ->select('id', 'name', 'email')
+            ->select('id', 'name', 'email', 'role')
             ->get();
     }
 

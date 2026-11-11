@@ -34,6 +34,14 @@ class Product extends Model
                 $product->sku = 'SKU-'.strtoupper(Str::random(6));
             }
         });
+
+        static::deleted(function (Product $product) {
+            ShopProduct::where('product_id', $product->id)->delete();
+        });
+
+        static::restored(function (Product $product) {
+            ShopProduct::withTrashed()->where('product_id', $product->id)->restore();
+        });
     }
 
     /**

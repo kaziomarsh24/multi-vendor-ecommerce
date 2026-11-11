@@ -15,6 +15,10 @@ export default function ProductCard({
     showShop = true,
     showStock = false,
 }: ProductCardProps) {
+    if (!item.product) {
+        return null;
+    }
+
     const currentShopSlug = shopSlug || item.shop?.slug;
     const targetUrl = currentShopSlug
         ? `/products/${item.product?.slug}?shop=${currentShopSlug}`

@@ -16,7 +16,9 @@ interface ShopCreateProps {
 }
 
 export default function ShopCreate({ availableOwners }: ShopCreateProps) {
-    const [ownerMode, setOwnerMode] = useState<'existing' | 'new'>('existing');
+    const [ownerMode, setOwnerMode] = useState<'existing' | 'new'>(
+        availableOwners && availableOwners.length > 0 ? 'existing' : 'new',
+    );
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [bannerPreview, setBannerPreview] = useState<string | null>(null);
 
@@ -352,34 +354,49 @@ export default function ShopCreate({ availableOwners }: ShopCreateProps) {
                                     <span className="text-rose-600">*</span>
                                 </label>
                                 {availableOwners.length > 0 ? (
-                                    <select
-                                        value={data.user_id}
-                                        onChange={(e) =>
-                                            setData('user_id', e.target.value)
-                                        }
-                                        className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
-                                    >
-                                        <option value="">
-                                            -- Choose an existing owner account
-                                            --
-                                        </option>
-                                        {availableOwners.map((owner) => (
-                                            <option
-                                                key={owner.id}
-                                                value={owner.id}
-                                            >
-                                                {owner.name} ({owner.email})
+                                    <>
+                                        <select
+                                            value={data.user_id}
+                                            onChange={(e) =>
+                                                setData(
+                                                    'user_id',
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="w-full rounded-lg border border-gray-3 bg-white px-3.5 py-2.5 text-sm text-dark transition focus:border-blue focus:outline-none"
+                                        >
+                                            <option value="">
+                                                -- Choose an existing account --
                                             </option>
-                                        ))}
-                                    </select>
+                                            {availableOwners.map((owner) => (
+                                                <option
+                                                    key={owner.id}
+                                                    value={owner.id}
+                                                >
+                                                    {owner.name} ({owner.email}){' '}
+                                                    {owner.role
+                                                        ? `— [${owner.role === 'customer' ? 'Customer' : 'Shop Owner'}]`
+                                                        : ''}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <p className="mt-1 text-[11px] text-gray-500">
+                                            Registered accounts (including
+                                            customers) can be selected.
+                                            Assigning a customer will
+                                            automatically promote them to Shop
+                                            Owner.
+                                        </p>
+                                    </>
                                 ) : (
                                     <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
-                                        All current shop owners are already
-                                        assigned. Switch to{' '}
+                                        All current users already have an
+                                        assigned shop. Switch to{' '}
                                         <strong>
                                             "Create New Owner Account"
                                         </strong>{' '}
-                                        to register a new merchant credentials.
+                                        above to register new merchant
+                                        credentials.
                                     </div>
                                 )}
                                 {errors.user_id && (

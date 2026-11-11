@@ -48,6 +48,7 @@ class StorefrontShopService
         $callback = function () use ($shop, $filters) {
             $query = $shop->shopProducts()
                 ->where('is_active', true)
+                ->whereHas('product')
                 ->with(['product.category']);
 
             if (! empty($filters['category'])) {
