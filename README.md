@@ -63,8 +63,9 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
-# 3. Run database migrations with sample data
+# 3. Run database migrations with sample data & create public storage symlink
 php artisan migrate:fresh --seed
+php artisan storage:link
 
 # 4. Build frontend production assets
 npm run build
